@@ -1,0 +1,433 @@
+#
+# OMNeT++/OMNEST Makefile for Mywork4
+#
+# This file was generated with the command:
+#  opp_makemake -f --deep
+#
+
+# Name of target to be created (-o option)
+TARGET = Mywork4$(EXE_SUFFIX)
+
+# User interface (uncomment one) (-u option)
+USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
+#USERIF_LIBS = $(CMDENV_LIBS)
+#USERIF_LIBS = $(TKENV_LIBS)
+
+# C++ include paths (with -I)
+INCLUDE_PATH = -I. -Idisplay -Ievents
+
+# Additional object and library files to link with
+EXTRA_OBJS =
+
+# Additional libraries (-L, -l options)
+LIBS =
+
+# Output directory
+PROJECT_OUTPUT_DIR = ../out
+PROJECTRELATIVE_PATH = /src
+O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
+
+# Object files for local .cc and .msg files
+OBJS = \
+    $O/CheckForEventsCommand.o \
+    $O/Command.o \
+    $O/DataCache.o \
+    $O/DataCacheSet.o \
+    $O/DisableNodeCommand.o \
+    $O/EventManager.o \
+    $O/ForwardingEntry.o \
+    $O/ForwardingEntrySet.o \
+    $O/HandleAdvertCommand.o \
+    $O/HandleDataCommand.o \
+    $O/HandleInterestCommand.o \
+    $O/HandleMoveModuleCommand.o \
+    $O/HandleNeighborCommand.o \
+    $O/HandleReinforcementCommand.o \
+    $O/HandleRoleAdvertCommand.o \
+    $O/MessageHelper.o \
+    $O/NodeStartupCommand.o \
+    $O/RoutingAndAggregation.o \
+    $O/ScheduledEvent.o \
+    $O/SendAdvertCommand.o \
+    $O/SendDataCommand.o \
+    $O/SendInterestCommand.o \
+    $O/SendReinforcementCommand.o \
+    $O/SendRoleAdvertCommand.o \
+    $O/SetRoleCommand.o \
+    $O/SoftMessage.o \
+    $O/txc20.o \
+    $O/GenericMessage_m.o \
+    $O/tictoc20_m.o
+
+# Message files
+MSGFILES = \
+    GenericMessage.msg \
+    tictoc20.msg
+
+#------------------------------------------------------------------------------
+
+# Pull in OMNeT++ configuration (Makefile.inc or configuser.vc)
+
+ifneq ("$(OMNETPP_CONFIGFILE)","")
+CONFIGFILE = $(OMNETPP_CONFIGFILE)
+else
+ifneq ("$(OMNETPP_ROOT)","")
+CONFIGFILE = $(OMNETPP_ROOT)/Makefile.inc
+else
+CONFIGFILE = $(shell opp_configfilepath)
+endif
+endif
+
+ifeq ("$(wildcard $(CONFIGFILE))","")
+$(error Config file '$(CONFIGFILE)' does not exist -- add the OMNeT++ bin directory to the path so that opp_configfilepath can be found, or set the OMNETPP_CONFIGFILE variable to point to Makefile.inc)
+endif
+
+include $(CONFIGFILE)
+
+# Simulation kernel and user interface libraries
+OMNETPP_LIB_SUBDIR = $(OMNETPP_LIB_DIR)/$(TOOLCHAIN_NAME)
+OMNETPP_LIBS = -L"$(OMNETPP_LIB_SUBDIR)" -L"$(OMNETPP_LIB_DIR)" $(USERIF_LIBS) $(KERNEL_LIBS) $(SYS_LIBS)
+
+COPTS = $(CFLAGS)  $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)
+MSGCOPTS = $(INCLUDE_PATH)
+
+#------------------------------------------------------------------------------
+# User-supplied makefile fragment(s)
+# >>>
+# <<<
+#------------------------------------------------------------------------------
+
+# Main target
+all: $(TARGET)
+
+$(TARGET) : $O/$(TARGET)
+	$(LN) $O/$(TARGET) .
+
+$O/$(TARGET): $(OBJS)  $(wildcard $(EXTRA_OBJS)) Makefile
+	@$(MKPATH) $O
+	$(CXX) $(LDFLAGS) -o $O/$(TARGET)  $(OBJS) $(EXTRA_OBJS) $(WHOLE_ARCHIVE_ON) $(LIBS) $(WHOLE_ARCHIVE_OFF) $(OMNETPP_LIBS)
+
+.PHONY:
+
+.SUFFIXES: .cc
+
+$O/%.o: %.cc
+	@$(MKPATH) $(dir $@)
+	$(CXX) -c $(COPTS) -o $@ $<
+
+%_m.cc %_m.h: %.msg
+	$(MSGC) -s _m.cc $(MSGCOPTS) $?
+
+msgheaders: $(MSGFILES:.msg=_m.h)
+
+clean:
+	-rm -rf $O
+	-rm -f Mywork4 Mywork4.exe libMywork4.so libMywork4.a libMywork4.dll libMywork4.dylib
+	-rm -f ./*_m.cc ./*_m.h
+	-rm -f display/*_m.cc display/*_m.h
+	-rm -f events/*_m.cc events/*_m.h
+
+cleanall: clean
+	-rm -rf $(PROJECT_OUTPUT_DIR)
+
+depend:
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc display/*.cc events/*.cc
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/CheckForEventsCommand.o: CheckForEventsCommand.cc \
+  ./CheckForEventsCommand.h \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./MessageHelper.h \
+  ./ForwardingEntry.h \
+  ./DataCache.h
+$O/Command.o: Command.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h
+$O/DataCache.o: DataCache.cc \
+  ./DataCache.h
+$O/DataCacheSet.o: DataCacheSet.cc \
+  ./DataCacheSet.h \
+  ./DataCache.h
+$O/DisableNodeCommand.o: DisableNodeCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h \
+  ./DisableNodeCommand.h
+$O/EventManager.o: EventManager.cc \
+  ./ScheduledEvent.h \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./EventManager.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./DataCache.h
+$O/ForwardingEntry.o: ForwardingEntry.cc \
+  ./ForwardingEntry.h
+$O/ForwardingEntrySet.o: ForwardingEntrySet.cc \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h
+$O/GenericMessage_m.o: GenericMessage_m.cc \
+  ./GenericMessage_m.h
+$O/HandleAdvertCommand.o: HandleAdvertCommand.cc \
+  ./tictoc20_m.h \
+  ./HandleAdvertCommand.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h \
+  ./SoftMessage.h
+$O/HandleDataCommand.o: HandleDataCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h \
+  ./SoftMessage.h \
+  ./HandleDataCommand.h
+$O/HandleInterestCommand.o: HandleInterestCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./HandleInterestCommand.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h \
+  ./SoftMessage.h
+$O/HandleMoveModuleCommand.o: HandleMoveModuleCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./HandleMoveModuleCommand.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./SoftMessage.h \
+  ./DataCache.h
+$O/HandleNeighborCommand.o: HandleNeighborCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./HandleNeighborCommand.h \
+  ./DataCache.h \
+  ./SoftMessage.h
+$O/HandleReinforcementCommand.o: HandleReinforcementCommand.cc \
+  ./HandleReinforcementCommand.h \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h \
+  ./SoftMessage.h
+$O/HandleRoleAdvertCommand.o: HandleRoleAdvertCommand.cc \
+  ./tictoc20_m.h \
+  ./HandleRoleAdvertCommand.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./SoftMessage.h \
+  ./DataCache.h
+$O/MessageHelper.o: MessageHelper.cc \
+  ./tictoc20_m.h \
+  ./GenericMessage_m.h \
+  ./MessageHelper.h
+$O/NodeStartupCommand.o: NodeStartupCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./NodeStartupCommand.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h
+$O/RoutingAndAggregation.o: RoutingAndAggregation.cc \
+  ./RoutingAndAggregation.h
+$O/ScheduledEvent.o: ScheduledEvent.cc \
+  ./tictoc20_m.h \
+  ./ScheduledEvent.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h
+$O/SendAdvertCommand.o: SendAdvertCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./SendAdvertCommand.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h
+$O/SendDataCommand.o: SendDataCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./SendDataCommand.h \
+  ./DataCache.h
+$O/SendInterestCommand.o: SendInterestCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./SendInterestCommand.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h
+$O/SendReinforcementCommand.o: SendReinforcementCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./SendReinforcementCommand.h \
+  ./DataCache.h
+$O/SendRoleAdvertCommand.o: SendRoleAdvertCommand.cc \
+  ./SendRoleAdvertCommand.h \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./DataCache.h \
+  ./SoftMessage.h
+$O/SetRoleCommand.o: SetRoleCommand.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./MessageHelper.h \
+  ./SoftMessage.h \
+  ./DataCache.h \
+  ./SetRoleCommand.h
+$O/SoftMessage.o: SoftMessage.cc \
+  ./tictoc20_m.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./RoutingAndAggregation.h \
+  ./Command.h \
+  ./GenericMessage_m.h \
+  ./ForwardingEntrySet.h \
+  ./ForwardingEntry.h \
+  ./DataCache.h \
+  ./SoftMessage.h
+$O/tictoc20_m.o: tictoc20_m.cc \
+  ./tictoc20_m.h
+$O/txc20.o: txc20.cc \
+  ./SendRoleAdvertCommand.h \
+  ./tictoc20_m.h \
+  ./HandleRoleAdvertCommand.h \
+  ./HandleInterestCommand.h \
+  ./EventManager.h \
+  ./ForwardingEntrySet.h \
+  ./SendInterestCommand.h \
+  ./ForwardingEntry.h \
+  ./SendReinforcementCommand.h \
+  ./SoftMessage.h \
+  ./HandleDataCommand.h \
+  ./HandleReinforcementCommand.h \
+  ./CheckForEventsCommand.h \
+  ./ScheduledEvent.h \
+  ./HandleAdvertCommand.h \
+  ./txc20.h \
+  ./DataCacheSet.h \
+  ./Command.h \
+  ./RoutingAndAggregation.h \
+  ./NodeStartupCommand.h \
+  ./GenericMessage_m.h \
+  ./SendAdvertCommand.h \
+  ./HandleMoveModuleCommand.h \
+  ./SendDataCommand.h \
+  ./MessageHelper.h \
+  ./HandleNeighborCommand.h \
+  ./DataCache.h \
+  ./DisableNodeCommand.h \
+  ./SetRoleCommand.h

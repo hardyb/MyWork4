@@ -1,0 +1,11 @@
+FORWARD STATE:        66 1 255 4 
+DELIVER IF:   1
+DELIVER COST: 2
+OBTAIN IF:    0
+OBTAIN COST:  9999
+
+CONTEXT:      
+CONTEXT:      
+
+
+

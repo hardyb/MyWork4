@@ -1,0 +1,261 @@
+
+
+
+
+
+
+interests
+
+send out interest - still work to do on directing
+at rec source
+match source to interest prefixes
+reinforce interest prefixes
+
+when sending data 
+match source data to prefix data keys
+for each send data on deliverinterfaces
+
+at each node along the way 
+do the same with incoming data
+
+
+
+===========================================================================
+
+advert
+
+send out advert - if advert geo is not a prefix of receiving node then node drops it
+advert must be a prefix
+
+
+at pub sink
+
+
+DELETE?
+match sink key 
+at rec source
+match source to interest prefixes
+reinforce interest prefixes
+
+
+
+
+eg 1
+
+advert
+\env\occ.prop\room1
+sink for pub 
+\env.prop\room1
+
+reinforce
+so what did we do?
+did we say sink key must be a prefix of advert?
+ie match data keys to prefix sink data
+
+what about geo but will it still work?
+
+eg 2
+
+advert
+\env\occ.prop\room1
+sink for pub 
+\env.prop
+
+well in this example the sink key IS a prefix of the advert
+and so would match and reinforce
+but actually the advert would have been dropped already
+so the idea is not very neat!!!!!!!!!!
+
+or would it have been dropped? - it's dropped on the bases of the node context not the sink key's context
+so if the node was in \prop\room1 it would get it
+should it match it?
+
+
+
+
+a more relevant example might be
+
+advert
+1.  \demand\threshold.\prop
+2.  \demand\threshold.\prop\room1
+
+A.
+sink
+\demand\threshold.\prop
+location: \prop\room1
+
+Can we actually do this?
+Does the application layer 'know' what context may have been set up?
+so far when we register as source or sink we use the longest node context every time
+
+B.
+sink
+\demand\threshold.\prop\room1
+location: \prop\room1
+
+
+1.  Here "sink key must be a prefix of advert" is NOT the case
+
+
+
+
+A. so what 'ought' to happen?
+
+for 1:
+it 'ought' to receive it
+
+for 2:
+it 'ought' to receive it  ??
+
+
+what will happen?
+
+for 1:
+
+
+for 2:
+
+
+
+
+
+
+
+
+
+
+eg 2
+
+advert
+\env\occ.prop
+sink for pub 
+\env.prop\room1
+
+in this example based on the matching just described the match would fail as
+prop\room1 is not a prefix of prop
+
+this again may not be very neat
+because what if we are advertising an event accross the property
+so all the rooms should pick it up
+mind you is this because the sink says it only wants \prop\room1 events
+
+
+
+######################
+
+
+I think we need to think carefully about the intention of
+1. setting the node geo context
+2. setting the geocontext part of the sink key
+3. setting the geocontext part of the source/advert key
+
+
+
+
+3.
+we are adding extra meaning to the data, ie adding context
+not occupancy generally but for this room for example
+
+
+
+single source event and interested parties within a common context
+
+
+
+
+
+
+
+
+
+
+=======================================================
+
+how do we phrase this
+
+for event based the source takes the initiative
+also
+it decides on the intended recipients (at least geographically)
+
+
+
+
+
+advert geographical element indicates region of intended recipients (as well as the ender?)
+
+interest geo element indicates region of required data
+
+
+
+
+#######################################################
+
+
+Also need to think about how the the context in the key is set
+currently it is the longest prefix taken from the node contexts automatically
+
+deonds on type of node:
+
+1.  autonomous node which doesn't know about the contexts
+2.  Node with manual user intervention (eg mobile phone)
+
+
+
+
+sinks for events should be sinks for events in the longest geo prefix right?
+what about floor threshold event?
+
+well events are waited for right?
+
+maybe 
+sinks for events should be always be sinks for events in the shortest geo prefix.
+then they will respond to from the room
+and from the floor/property
+
+so how do they respond to these events
+not really knowing anything about the context beforehand?
+well the event is the event and it's the source (or the contxt imparter pf the automated source) that
+decides the propogation
+
+
+AUTONOMOUS NODES
+======================================
+
+ADVERTS / EVENTS
+autonomous sources for events should be always use the longest node geo prefix.
+autonomous sinks for events should be always be sinks for events in the shortest node geo prefix.
+
+so...
+
+sink geo keys (shortest) must be a prefix of the incoming advert geo key to send a reinforcement and data
+this way the source of the event takes the initiative for what context the event is meaningful
+and the exploratory event is only diffused in its own context context
+
+likewise sink data keys must be a prefix of the incoming advert's data key to send a reinforcement and data
+this way they can respond to collections of data in the hierarchy if they wish
+
+this enables the use of a function for a common action for both parts of the fully qualified name  
+
+
+INTERESTS/QUERIES
+
+autonomous sources for queries should be always use the longest node geo prefix.
+autonomous sinks for queries should be always be sinks for queries in the shortest node geo prefix.
+
+so...
+
+the incoming interest geo key must be a prefix of the source geo keys (longest) to send a reinforcement and data
+this way the autonomous node not knowing about the contexts picks up all data it is interested in
+
+likewise incoming interest's data key must be a prefix of the source data keys to send a reinforcement and data
+this way sinks can query collections of data in the hierarchy if they wish
+
+this enables the use of a similar function to that for adverts/events for a common action for both parts of 
+the fully qualified name, but just reversing what is being searched on.
+
+
+*** say something re the above about the check of context at each node that is generic ***
+
+
+
+

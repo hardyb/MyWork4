@@ -1,0 +1,43 @@
+void f3(trie *t, int i, int n, const char *str, char* buf, void process(char* _buf))
+{
+	  trie *current = t;
+
+	  if ( i >= n )
+	  {
+		   if ( current->s )
+		   {
+			   cout << "\t- Found ";
+			   cout << current->s->full_name << endl;
+			   process(queue);
+		   }
+		   return;
+	  }
+	  
+      const char c = str[i];
+	  t = t->first_child; 
+      t = trie_at_level_noline(t,c);
+      if(t == NULL)
+	  {
+		   for ( i++; i < n && str[i] != '.'; i++ );
+		   if ( str[i] == '.' ) cout << "\t- Moving to next section " << endl;
+		   i--;
+		   t = current;
+		   f3(t, i+1, n, str, buf, process);
+	  }
+	  else
+	  {
+		  *(buf) = c;
+		  *(buf+1) = '\0';
+
+		  f3(t, i+1, n, str, buf+1, process);
+		  for ( i++; i < n && str[i] != '.'; i++ );
+		  if ( str[i] == '.' ) cout << "\t- Moving to next section " << endl;
+		  i--;
+		  t = current;
+		  f3(t, i+1, n, str, buf, process);
+	  }
+
+	  return;
+
+}
+

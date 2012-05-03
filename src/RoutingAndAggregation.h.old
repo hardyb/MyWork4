@@ -1,0 +1,165 @@
+#ifndef RoutingAndAggregation_h
+#define RoutingAndAggregation_h
+
+
+
+#define MAXLEVELS 10
+
+#define OBTAIN 1
+#define DELIVER 2
+#define REINFORCE_DELIVER 3
+#define REINFORCE_OBTAIN 4
+
+
+#define ANY_STATE 0
+#define SELF_INTERFACE -1
+#define UNKNOWN_INTERFACE -2
+#define COST_ZERO 0
+
+
+
+//#define DEBUG
+
+//#ifndef max
+//	#define max( a, b ) ( ((a) > (b)) ? (a) : (b) )
+//#endif
+
+//#ifndef min
+//	#define min( a, b ) ( ((a) < (b)) ? (a) : (b) )
+//#endif
+
+
+
+
+
+
+
+typedef struct Interface
+{
+	int iName;
+	bool up;
+	int type;
+};
+
+
+typedef struct KDGradientNode;
+
+struct InterfaceList
+{
+	 Interface* i;
+	 struct InterfaceList *link;
+};
+
+
+
+
+typedef struct State
+{
+	// Consider having state as just the int
+	// and in future maybe a string
+	// but possibly never a structure - no additional members needed
+	int dataName;
+	KDGradientNode* bestGradientToObtain;
+	bool bestGradientToObtainUpdated;
+	InterfaceList* obtainInterfaces;
+	KDGradientNode* bestGradientToDeliver;
+	bool bestGradientToDeliverUpdated;
+	InterfaceList* deliveryInterfaces;
+};
+
+
+
+typedef struct StateNode
+{
+	State* s;
+	StateNode* left;
+	StateNode* right;
+};
+
+typedef struct InterfaceNode
+{
+	Interface* i;
+	InterfaceNode* left;
+	InterfaceNode* right;
+};
+
+
+
+
+
+
+typedef struct KDGradientNode
+{
+	// just these for now
+	// also consider that maybe keys should be an array of State pointers
+	// OK NOW WE USING POINTERS AND NEWKDNODE() creates or gets accordingly
+	State* key1;
+	Interface* key2;
+	int costToObtain;
+	int costToDeliver;
+	bool deliveryReinforcement;
+	bool obtainReinforcement;
+	KDGradientNode* left;
+	KDGradientNode* right;
+
+
+};
+
+
+typedef struct KDNode
+{
+	State* keys[2];
+	State* newState;
+	KDNode* left;
+	KDNode* right;
+};
+
+
+
+
+typedef struct RoutingData
+{
+	StateNode* stateTree;
+	InterfaceNode* interfaceTree;
+	KDGradientNode* grTree;
+	KDNode* kdRoot;
+};
+
+
+
+extern RoutingData* rd;
+
+
+
+void add(struct InterfaceList** q, Interface* _i);
+StateNode* newStateNode(int stateDataname);
+InterfaceNode* newInterfaceNode(int interfaceName);
+StateNode* InsertStateNode(StateNode** treeNode, int stateDataname);
+InterfaceNode* InsertInterfaceNode(InterfaceNode** treeNode, int interfaceName);
+bool TraversStateNodes(StateNode* tree, void* caller, void process(State* s, void* c));
+StateNode* FindStateNode(StateNode* tree, int val);
+InterfaceNode* FindInterfaceNode(InterfaceNode* tree, int val);
+KDGradientNode* newKDGradientNode(int sName, int iName, int obtain, int deliver);
+KDGradientNode* insertKDGradientNode( int sName, int iName, int costType, int pCost, KDGradientNode* treeNode, int lev );
+KDGradientNode* reinforceDeliverGradient(int sName, int iName);
+KDGradientNode* reinforceObtainGradient(int sName, int iName);
+KDGradientNode* setObtainGradient(int sName, int iName, int pCost);
+KDGradientNode* setDeliverGradient(int sName, int iName, int pCost);
+KDNode* newKDNode(int keys[], int newStateName);
+KDNode* insertKDNode( int stateDataname[], int newStateName, KDNode* treeNode, int lev );
+KDGradientNode* SearchForKDGradientNode( int sName, int iName, KDGradientNode* treeNode);
+KDNode* SearchForKDNode( int stateDataname[], KDNode* treeNode );
+int getNewState(int input);
+int SearchForKDNodeTransition(int input);
+void PrepareKDNodeDisplayStream(KDNode** treeNode, int level, std::ostringstream* os);
+void PrepareKDGradientNodeDisplayStream(KDGradientNode** treeNode, int level, std::ostringstream* os);
+void DisplayKDTree(KDNode** treeNode, std::ofstream& infile);
+void DisplayKDGradientTree(KDGradientNode** treeNode, std::ofstream& infile);
+
+
+
+
+#endif
+
+
+

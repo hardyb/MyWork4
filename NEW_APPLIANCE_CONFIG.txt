@@ -1,0 +1,57 @@
+
+
+
+
+#define DEMAND				0
+#define SUPPLY				1
+#define ENVIRONMENTAL		3
+
+#define OCCUPANCY			0
+#define TEMP				1
+#define LIGHT				2
+
+#define BID					0
+#define CURRENT				1
+
+
+#define EVENTBASED			128
+#define QUERYBASED			0
+
+
+std::map<string,char*> sink;
+std::map<string,char*> source;
+
+
+
+
+sink["monitor"] = {DEMAND^QUERYBASED, CURRENT, 0};
+source["TV"] = {DEMAND^QUERYBASED, CURRENT, 0};
+source["heater"] = {DEMAND^QUERYBASED, CURRENT, 0};
+source["tdryer"] = {DEMAND^QUERYBASED, CURRENT, 0};
+source["dish"] = {DEMAND^QUERYBASED, CURRENT, 0};
+
+
+
+source["ocsens"] = {ENVIRONMENTAL^EVENTBASED, OCCUPANCY, 0};
+sink["Radio"] = {ENVIRONMENTAL^EVENTBASED, OCCUPANCY, 0};
+
+
+
+//sinks["wash"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["kett"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["bulb"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["switch"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["switch1"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["switch2"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["switch3"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["switch4"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["txc3"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["iron"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["meter"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["micro"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+//sinks["freezer"] = {ENVIRONMENTAL, OCCUPANCY, 0};
+
+
+
+
+

@@ -1,0 +1,264 @@
+
+
+
+
+interface/node types
+
+
+
+
+
+
+ideas
+
+
+
+
+only allow adverts to pass that originated from the same type of node
+eg from occupancy sensor
+
+
+
+if advert/interest to/from say the DR at meter or consumption at appliance then do not extend the adverts over the sensor nodes
+
+
+
+advert
+interest
+
+reinforce
+data
+
+role
+
+
+types of data
+==============
+
+A) - many listening to one
+As source - advertise, if reinforcement received send data
+As sink   - wait for advertisement, if received send reinforcement
+
+B) - one monitor many sending
+As source - wait for interest, if received send reinforcement
+As sink   - send interest, if reinforcement received send data
+
+
+
+
+
+
+===================================================================================
+===================================================================================
+===================================================================================
+
+what about:
+
+
+Final data:  (final single unaggregatable item / value)
+
+building consumption
+room occupancy		(ambiguous see note below)
+
+
+
+Aggregatable data:
+
+appliance consumption	(ambiguous see note below)
+
+
+
+Note:
+This is a bit hard to accurately define.  
+We can aggregate occupancy for a number of rooms by ORing them all in order to get occupancy for the whole house.
+We can aggregate appliance consumption to get total, average etc consumption.
+
+
+I guess it depends what matching you stipulate.  
+If you demand match on event=occupancy region=room1 then the actual dataname is something like \OCCUPANCY\ROOM1 and the rest are kind of the content.
+If you just demand consumption, i.e. event=consumption and do not stipulate a specific appliance then the actual dataname is \CONSUMPTION and the rest are just content
+
+
+so newly defined
+
+what about:
+
+
+Final data:  (final single unaggregatable item / value)
+\BUILDINGCONSUMPTION
+\CONSUMPTION\APPLIANCE123
+\OCCUPANCY\ROOM1
+
+Aggregatable data:
+\CONSUMPTION
+\OCCUPANCY
+
+However there is not model based way to see clearly when a dataname is final and when it is not.  So far it is only clear with some world application knowledge
+
+So maybe think about what fully identifies an event
+
+having said this there are events like change in occupancy or consumption then there is just current facts and data like current consumption, average consumption, running time.
+
+events can be sent asynchronously when a change occurs, data or state can be sent when?
+
+
+
+
+
+
+
+
+
+
+
+
+===================================================================================
+===================================================================================
+===================================================================================
+
+
+
+
+
+
+
+data only nodes
+================
+
+if you discover you are neighbour to a data only node then if you get data arriving from the node then you should think of yourself as a source and either reinforce interests or send adverts dependant on the type of data.
+
+However if every neighbour of the data only node does this then there would be an excess of traffic not a saving of traffic  - HOW TO RESOLVE THIS?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===================================================================================
+===================================================================================
+===================================================================================
+
+
+
+
+
+
+
+
+Special consumption data (SCD)
+=========================
+
+current=2000W
+avaerage=1500W
+maximum=2000W
+timeleft=60mins
+
+
+
+So...
+
+A.
+===
+appliances which support this facility
+
+send out this data item
+but also store this data item
+
+should it be exactly the same data item since it's many-to-many communication?
+
+The appliance will look to see if it knows about any other devices running
+and possibly consider a published threshold 
+then decide whether to delay startup
+
+
+B.
+===
+Also appliances which will not delay send out a similar message
+e.g. a kettle
+current=3000W
+avaerage=3000W
+maximum=3000W
+timeleft=3mins
+
+and the other appliances will decide whether to pause their program or not
+
+so there are the senders
+eg
+kettle
+microwave
+washing machine
+dishwasher
+tumble dryer
+
+
+Now - how to manage the publish subscribe ?
+================================================
+
+
+I am probably one of many willing to send this data so await an interest
+
+I am probably one of many wanting to receive these data so await an advert
+
+
+OR
+
+I want to get from many senders to send an interest
+
+I want to let multiple appliances know what I'm doing to send an advert
+
+
+
+
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+So lets have attribute value pairs
+a set for attribute keys
+a set for values
+
+
+Do keys only apply to interests?
+
+or may be also adverts
+
+currently only have an INT!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

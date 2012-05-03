@@ -1,0 +1,312 @@
+
+
+
+
+PRIORITY
+===========
+
+look at paper sheet that has a circled diagram about what if we have a role that outputs from from 1 but also forwards 4 for 4 on to a different node, so the node implements a role and a forwarder  -  think this may be Ok but check it out in head 
+
+some code doesn't set the module index, but it might be useful to do that
+
+what about the current state (change?) of nodes that just forward same value (not roles)
+
+
+
+Need at some point to take a serious look at the way the fib and cache entries are structure.  One example problem is, it is possible to have multiple transisions from the same state with the same trigger.  etc etc.
+
+eg:
+1 5 goes to 7
+1 5 goes to 8 - makes no sense
+
+solution - structure the data properly
+
+
+
+
+what happens if nodes respond to an advert with a reinforcement before all the adverts have diseminated.  Time delay??  Some other strategy??
+
+module index self text
+
+Need to check ANY stae as well as the actual state before sending or not sending out
+need to change state of module whether or not the interface for the out data is reinforced
+the reinforcement is really just for sending out the new state
+
+
+Need to look at associating the existing role entry with the just reinforced advert rather than create a new forward same to self fib entry
+that's the ins something similar needs to be done with the outs I think
+
+
+
+
+Need to think about the possibility a module action file can get overwritten before it is used
+Idea to have an additional value that identifies a collection of forwarding entrioes that make up a role
+
+
+
+
+remove any old member data from Txc20
+
+maybe this:
+============
+* when a node is disabled or when it starts
+up again after knowing it was previously disabled
+it should clear its caches
+
+* On start up / enable, nodes should contact neighbours and get gradients
+
+when resending the advertisement the sending node needs to update it's own caches
+ie the reinforcement
+
+At this stage write something to add an FSM directly at a particular
+node, from the c# program
+
+
+need to give some careful thought now to:
+which cache the roles go into and how the interface and
+reinforced are handled.  maybe that's not necessary and i havent thought it through
+
+NBNB:  I think I have been wrong to make the key to the caches {current, in, out}
+perhaps it should just be {current, in}
+think about it
+
+//NBNB:  I think it may be important for an initial sender of an adver to 
+
+
+Need to look at how reinforcement is done
+cos when it gets to the source it creates a new fib entry
+
+
+I THINK IT IS QUITE IMPORTANT NOW
+That I begin to better structure the commands
+into key acts in member methods
+so this will fit better with formalised definitions 
+in text or graph theory
+
+
+was there an idea listed some where not to send back to sender?
+Alos what is the best strategy for dealing with adverts
+arriving back at the source
+
+
+move marking red (and other stuff) to the helper class??
+
+
+===========  POS MOST DONE ==================
+finish the programming for reinforcements
+need to consider multiple sources and sinks
+possibly change interests and adverts not to go back to sender
+reinforcements done as possibly reinforced new interest entries but with some values as default
+we are adding -1 for the interface on reinforcement
+we need a more complete way to dfeine sinks and sources and the data they are concerned with
+experiment with introducing a sink that will go through another reinforced path and if it sends the reinforce messageall the way then look at the rules
+do the send data bit
+kind of done
+find a way to mark/bold connections
+===============================================
+
+
+
+
+
+
+
+
+
+
+GENERAL LIST
+===============
+
+is broken used or going to be used - if not remove it.
+
+check what gradientvalue (not pathvalue) is used for in datacache
+
+consider what to do if the module action event file between c# and omnet
+is not deleted yet when you want to add another
+
+long term need to consider extravalue to go with advert value in case
+multiple sources are allowed to deliver same data
+
+
+improve drawing of lines to centre of node in vis studio
+possibly reconfigure omnet++ drawing so it uses pixels in same way as vis studio
+could then may be save a number of different configurations (in ned?) created in vis studio
+
+
+Try to link in in some way to the ned files, even if it's just to set the positioning
+
+be able to set various groups of bolded connections globally
+
+
+make the rules in the commands more modular
+
+be able to handle positioning better
+
+interests shoud include a mac+random for interest instance
+should be able to set different dat/names for intersts
+
+
+improve the message names so we can easily see the internal ones
+
+
+introduce node removal
+introduce path fixing
+
+introduce node adding
+get neighbours to detect etc
+
+
+be able to send a role request (default data)
+be able to choose the data for the role requests
+
+
+to be able to set node characteristics
+such as
+the supported function set
+what names/data it is a source/sink for
+whether it is a source/sink to make it auto respond (eg reinforce)
+
+
+
+for the names/data to be text and to use the naming scheme
+
+reduce the activity in check message
+
+
+
+
+
+
+
+
+DONE  -  DELETE MOST BUT SOME KEEP A RECORD
+=============================================
+
+
+
+why is the reinforcement interface -1? no good for the data
+need to stop a joining reinforcement going all the way through
+
+
+
+try accessing connection displaystring through gate not channel directly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IDEAS
+=================
+
+
+
+
+so maybe we add an advert to a self interface for sources
+if a roaming advert turns up it knows it is at the place it tries to point to
+
+We could also have interests that point to self for the sinks
+then data will know it has arrived
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+what about a role?
+
+so lets say we put the role in the fib
+
+now a role has different outs for different ins and different conditions
+so the detail of one forwarding may be represented by several entries (a FSM).
+so I think we need a group for each interface
+
+
+If an interest arrives at a regulsr source MAYBE we can just leave it to do its job
+it's basically just a record of path values to sink from every node in the network
+
+what if it arrives at a role  -  not sure...
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+recap basic interest working
+we send out an interest for say data 5
+eventually a node will have a 5 in so 5 out entry for each neighbour interface from itself
+and each will have a different path value
+
+
+
+now a 5 in so 5 out entry basically signifies
+under all circumstances if a 5 comes in send out a 5 on this interface to go towards a sink
+
+
+
+It may be worth reworking the data structure.  I guess may be a 
+"forwarding action" could be assosiated with a collection of gradients (ie an interface and pathvalue) ???
+
+
+
+
+
+
+
+a more general concept
+=======================
+
+
+the concept is of 
+
+not roles and forwarders, but a single concept
+ie
+eg:
+a transducer?
+
+
+
+
+finite state transducer (FST)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+
+
+
+
+
+first piece completed retrospectively
+
+ROLES
+============
+I think I added the new role stuff in, changing it slowly bit by bit
+to the raw byte array including transaction array as distinct from the 
+linked list version.
+
+Not sure if I finished the bit where roles can be added to a 
+node directly from the vs app'
+
+I 'think' I redid the bit that runs the default role that just does forwarding
+I 'think' I tested this.
+
+
+
+
+
+
+THE NEW TRIES for the new data name and context system
+=======================================================
+
+So far I 'think' I have just added the structs and the 
+functions in for this, but haven't hooked them up in
+any way.
+
+
+No, doesn't look like it
+
+
+
+
+
+
+
+
+
+
+
+

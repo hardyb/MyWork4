@@ -1,0 +1,27 @@
+
+
+
+VERSION 2.1.2
+
+
+Now compiling
+a lot of unused stuff in the framework and in the old cpp code has been commented out ok
+need to update the bit that reads in the sink and source data values and
+sets these in the framework
+also need to consider the work to set a time for reinforcement required
+and action the reinforcement after a brief wait to know that all gradient costs are in
+
+
+
+
+
+
+
+VERSION 2.1.1
+
+From here on We shalll call version 2 the one with the hierarchical naming
+
+This current version is not yet compiled or tested
+
+comilation appears to have left the introduction of some additional 
+members to the state object I think

@@ -1,0 +1,56 @@
+
+
+
+So when everything seems to be working ok we need to go through and make a number of improvements and work to tset more fully
+
+I shall be marking some important issues to deal with, with \\TODO
+
+Look out for these
+
+
+NB:  Check all outgoing struct preparation to see that length is prepared correctly
+NB:  Add defensive code for incoming packets which may be erronious and with too much presumption will make code crash
+
+RE SENDING (802.15.4???) : Probably need to have a send with a collection of interface addresses
+then layer 2 can deal accordingly, either physical broadcast with csma and the receiving nodes just
+pick up if addressed to them (how much energy does a receiving node use to drop not for them packets)
+or not sure if beaconing used whether this would save even more for the not included nodes
+
+ - improve the number of messages - consider piggy backing.  are all the neighbour messages necessary?  Think this through.
+
+ - Improve the omnet++ stuff like having a single module for checking for the instrumentation etc and make sure not running against certain modules unnecessarily such as unstarted modules
+
+ - restructure some of the poorly written if then and or etc
+ - a lot of identifier renaming is needed
+ - look at all the unnecessary casts just out of lazyness
+ - add defensive coding where there may be null returns etc etc
+ - try to reduce code base by combining code etc etc
+ - try to reduce the use of the stack 
+			by reducing num and size of params passed - some don't change could be global??
+			by changing recursive calls to loops where possible
+ - try to reduce memory usage, size and number of structs, unnecessary memory etc
+ - try to reduce cpu usage by optimising algorithms and cutting unnecessary code
+ - remove all unused code and all commented out code
+ - write test data and code to rigorously test the more complex elemnets.
+ - remove all warnings and possibly run some C/C++ good coding practice tools
+
+IDEA!!!
+
+Should all appliances send their consumption data at exactly the same time or...
+perhaps for stats and presentation reasons it needs to be pretty close...
+but say it is every five minutes is there any intrinsic way they could spread over a few seconds to reduce collisions?
+also possibly to reduce buffering costs
+could this tie in with the use of memory ie not just for routing tables
+
+
+
+Regarding test data
+we must trie every combination of prefix and non-prefix matching
+with the data part of the name and the context/geographical part
+for query mode and for event mode and for collaberation mode
+
+
+
+
+
+

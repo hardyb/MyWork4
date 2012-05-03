@@ -1,0 +1,35 @@
+moved to omnet
+typedef struct state
+typedef struct context
+typedef struct trie 
+
+
+moved to omnet
+state* state_new() 
+context* context_new() 
+trie* trie_new() 
+trie* trie_at_level(trie *t, char c) 
+trie* trie_at_level_noline(trie *t, char c) 
+trie* trie_add(trie *t, const char *str, int object) 
+
+
+
+added to header file
+added to cpp
+trie* trie_lookup_longest_prefix_extra2
+trie* trie_lookup2
+trie* f
+void new_one
+ 
+
+
+
+
+
+
+what kind of things have we done so far?
+
+we have:
+
+replaced packet structures with one that allows variable length data
+started to replace functions that read in the data from the application layer iro variable lenth data

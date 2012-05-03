@@ -1,0 +1,31 @@
+Adding: x.a.cd
+Adding: -x-.-ab.c
+Adding: -xy.a.c
+Adding: -x-yz.a.cd
+
+So...
+
+These are the entries in the state tree
+"x.a.cd"
+"x.ab.c"
+"xy.a.c"
+"xyz.a.cd"
+
+
+this is the incoming message:   xyz.ab.cd
+
+
+Listing: xyz.a.cd
+Listing: xy.a.c
+Listing: x.ab.c
+Listing: x.a.cd
+
+
+Expecting to match:
+x.a.cd
+x.ab.c
+xy.a.c
+xyz.a.cd
+
+
+

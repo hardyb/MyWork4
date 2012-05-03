@@ -1,0 +1,220 @@
+
+=================================================================
+001: CRASHING WHILE DIFFUSING INTEREST
+=================================================================
+
+trie* trie_add(trie *t, const char *str, int object)
+{
+   const int n = strlen(str);
+   int i;
+   trie* found;
+   //cout << "Adding: ";
+
+   for(i=0; i<n; i++)
+   {
+      const char c = str[i];
+      trie* parent = t;
+
+      t = t->first_child;
+      t = found = trie_at_level(t,c);
+      if ( !found )
+      {
+         t = trie_new();
+         t->keyelem = c;
+         //t->substr[1] = '\0';
+		 //cout << c;
+         t->next_sibling = parent->first_child;
+         parent->first_child = t;
+      }
+   }
+
+   if ( !found )
+   {
+	   if ( object == STATE )
+	   {
+		   t->s = newStateObject();
+	   }
+	   if ( object == CONTEXT )
+	   {
+		   t->c = context_new();
+	   }
+   }
+
+   //cout << endl;
+   return t;
+}
+
+
+
+
+
+
+the interest .4 passes over .4 and over .41  ??
+This is Ok and works the same as the adverts
+
+but...   interest for 4.1 going out should be able to go over 4 til it gets within 4.1
+
+
+so what is this particular problem?
+
+if we reach a node with no stored data
+then we actually add the data in the interest ie 22.4 which is fine
+
+however if we reach some other node for example the source
+and the source already has data 22.41 (ie it will ultimately satisfy the interest)
+when the interest arraives it tries to add 22.4
+and it reaches 22.4 and is happy to match and believes there is a state object at that node when there isn't
+so it returns the trie node from the trie_add function but the node has a null s object
+
+
+
+what SHOULD we be doing?
+
+so I THINK - at this 'particular point' we are not concerned with any kind of prefix or non-prefix matching
+we are primarily concerned with getting access to the 'specific' state object short or long
+or creating it if it does not exist
+THEN it is this version of the state key name (short or long) that actually has the (best) deliver gradient
+what ever prefix matching data ends up actually being sent
+
+
+So... do we need to fix the trie_add function
+what about this...
+
+
+trie* trie_add(trie *t, const char *str, int object)
+{
+   const int n = strlen(str);
+   int i;
+   //trie* found;
+   //cout << "Adding: ";
+
+   for(i=0; i<n; i++)
+   {
+      const char c = str[i];
+      trie* parent = t;
+
+      t = t->first_child;
+      t trie_at_level(t,c);
+      //t = found = trie_at_level(t,c);
+      //if ( !found )
+      if ( !t )
+      {
+         t = trie_new();
+         t->keyelem = c;
+         //t->substr[1] = '\0';
+		 //cout << c;
+         t->next_sibling = parent->first_child;
+         parent->first_child = t;
+      }
+   }
+
+   //if ( !found )
+   //{
+	//   if ( object == STATE )
+	//   {
+	//	   t->s = newStateObject();
+	//   }
+	//   if ( object == CONTEXT )
+	//   {
+	//	   t->c = context_new();
+	//   }
+   //}
+
+
+   if ( object == STATE && !(t->s) )
+   {
+	t->s = newStateObject();
+   }
+
+
+   if ( object == CONTEXT && !(t->c) )
+   {
+	t->c = context_new();
+   }
+
+
+
+
+   //cout << endl;
+   return t;
+}
+
+
+
+=================================================================
+002: QUERY BASED SOURCE FOR 22.41 not responding to QUERY 22.4
+=================================================================
+
+
+
+so...
+how does it actually work
+
+if query reach a node with no stored data
+then we actually add the data from the interest ie 22.4 which is fine
+
+we do the same at the source node
+so that node has 22.41 and 22.4
+the first is marked as source action but has no (best) gradient
+
+(COS only sink for a record gets deliver grad and source for pub gets an obtain grad - this is so they can pass these grads on to neighbours)
+
+the second is marked as forwarding action and has a (best?) deliver gradient
+
+under the single integer data names the existing source data object would have been used to add the deliver gradient
+
+what we would expect I THINK is this:
+
+the regular automatic check will pick up this ...
+the source action state key has a prefix state which has a best deliver gradient
+
+so it would then reinforce this best deliver gradient key (not the source key)
+
+then it would send the sourec data....   and so on...
+
+
+
+
+take a look at what happens with an advert 
+when an advert reaches a sink for pub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

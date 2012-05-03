@@ -1,0 +1,76 @@
+
+
+we need a frame format:
+
+
+
+bytes
+
+1	The messag type, ie neighbor data, advert, etc
+1	For the moment this will be just one byte, indicating the relevant value
+
+
+
+
+preconfigured adverts are sent when the device knows it has a neighbor
+this is fine as adverts still discipate as more devices come on line
+
+Various packets are sent out in response to incoming packets
+we need a mechanism to direct to the relevant function
+
+
+We need to decide how to know to send out reinforcements
+OK - so for now lets do this as above, ie in response to incoming packet (ie advert)
+BUT.....
+What about while advertisments are still being set up
+We will be reinforcing a path that is not yet the best 
+over a network that is still establishing the routes
+DO WE NEED TO WAIT?
+What do we wait for?  We could wait till all gradients have a value
+but even then sme values could be updated with better values as the
+network establishes itself
+
+
+
+We need to decide how to know to send out data out
+
+May be just in response to certain degrees of changes on sensors
+provided of course there is a reinforced interface
+
+===========================================================================
+
+
+
+we need to make the interfaces generic
+
+perhaps we need call backs for actions like forwarding etc
+
+may be call backs for send to interface including send to (self) application
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

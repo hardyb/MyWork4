@@ -1,0 +1,747 @@
+// TablesInC.cpp : Defines the entry point for the console application.
+//
+
+//#include "stdafx.h"
+
+#include <stdlib.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <conio.h>
+#include <cstdarg>
+#include "RoutingAndAggregation.h"
+
+
+static int currentState = 1;
+static int K = 2;
+
+
+RoutingData* rd;
+
+
+
+StateNode* newStateNode(int stateDataname)
+{
+	StateNode* n = (StateNode *)malloc(sizeof(StateNode));
+	n->s = (State *)malloc(sizeof(State));
+	n->s->dataName = stateDataname;
+	n->s->bestGradientToObtain = NULL;
+	n->s->bestGradientToDeliver = NULL;
+	n->s->deliveryInterfaces = NULL;
+	n->s->obtainInterfaces = NULL;
+	n->s->bestGradientToObtainUpdated = false;
+	n->s->bestGradientToDeliverUpdated = false;
+	n->left = NULL;
+	n->right = NULL;
+	return n;
+}
+
+
+InterfaceNode* newInterfaceNode(int interfaceName)
+{
+	InterfaceNode* n = (InterfaceNode *)malloc(sizeof(InterfaceNode));
+	n->i = (Interface *)malloc(sizeof(Interface));
+	n->i->iName = interfaceName;
+	n->i->up = true;
+	n->i->type = 0;
+	n->left = NULL;
+	n->right = NULL;
+	return n;
+}
+
+
+
+
+ StateNode* InsertStateNode(StateNode** treeNode, int stateDataname)
+ {
+     if (*treeNode == NULL)
+	 {
+		*treeNode = newStateNode(stateDataname);
+#ifdef DEBUG
+		std::cout << "Inserted state: " << stateDataname << " = true" << std::endl;
+#endif
+		return *treeNode;
+	 }
+
+	 if (stateDataname == (*treeNode)->s->dataName )
+	 {
+#ifdef DEBUG
+		 std::cout << "Inserted state: " << stateDataname << " = FALSE" << std::endl;
+#endif
+		 return *treeNode;
+	 }
+
+	 if (stateDataname < (*treeNode)->s->dataName)
+	 {
+	     // I think possibly returns need to occurr here also
+		 InsertStateNode(&((*treeNode)->left), stateDataname);
+	 }
+	 else
+	 {
+	     // I think possibly returns need to occurr here also
+		InsertStateNode(&((*treeNode)->right), stateDataname);
+	 }
+ }
+
+
+
+ InterfaceNode* InsertInterfaceNode(InterfaceNode** treeNode, int interfaceName)
+ {
+     if (*treeNode == NULL)
+	 {
+		*treeNode = newInterfaceNode(interfaceName);
+#ifdef DEBUG
+		std::cout << "Inserted interface: " << interfaceName << " = true" << std::endl;
+#endif
+		return *treeNode;
+	 }
+
+	 if (interfaceName == (*treeNode)->i->iName )
+	 {
+#ifdef DEBUG
+		 std::cout << "Inserted interface: " << interfaceName << " = FALSE" << std::endl;
+#endif
+		 return *treeNode;
+	 }
+
+	 if ( interfaceName < (*treeNode)->i->iName )
+	 {
+	     // I think possibly returns need to occurr here also
+		 return InsertInterfaceNode(&((*treeNode)->left), interfaceName);
+	 }
+	 else
+	 {
+	     // I think possibly returns need to occurr here also
+		return InsertInterfaceNode(&((*treeNode)->right), interfaceName);
+	 }
+ }
+
+
+ bool TraversStateNodes(StateNode* tree, void* caller, void process(State* s, void* c))
+ {
+	 if ( tree )
+	 {
+		 process(tree->s, caller);
+	 }
+	 else
+	 {
+		 return false;
+	 }
+	 TraversStateNodes(tree->left, caller, process);
+	 TraversStateNodes(tree->right, caller, process);
+	 return true;
+ }
+
+
+
+ bool TraversInterfaceNodes(InterfaceNode* tree, void* caller, void process(Interface* i, void* c))
+ {
+	 if ( tree )
+	 {
+		 process(tree->i, caller);
+	 }
+	 else
+	 {
+		 return false;
+	 }
+	 TraversInterfaceNodes(tree->left, caller, process);
+	 TraversInterfaceNodes(tree->right, caller, process);
+	 return true;
+ }
+
+
+
+StateNode* FindStateNode(StateNode* tree, int val)
+{
+    StateNode *next = tree;
+#ifdef DEBUG
+	std::cout << "Searching for: " << val << std::endl;
+#endif
+
+    int i = 0;
+	while (next != NULL) {
+#ifdef DEBUG
+		std::cout << "Reached node: " << next->s->dataName << std::endl;
+#endif
+		if (val == next->s->dataName) {
+#ifdef DEBUG
+			std::cout << "Found = true" << std::endl << std::endl;
+#endif
+            return next;
+		} else if (val < next->s->dataName) {
+            next = next->left;
+        } else {
+            next = next->right;
+        }
+		i++;
+    }
+
+    //not found
+#ifdef DEBUG
+	std::cout << "Found = false" << std::endl << std::endl;
+#endif
+    return NULL;
+}
+
+
+
+InterfaceNode* FindInterfaceNode(InterfaceNode* tree, int val)
+{
+    InterfaceNode *next = tree;
+#ifdef DEBUG
+	std::cout << "Searching for: " << val << std::endl;
+#endif
+
+    int i = 0;
+	while (next != NULL) {
+#ifdef DEBUG
+		std::cout << "Reached node: " << next->i->iName << std::endl;
+#endif
+		if (val == next->i->iName) {
+#ifdef DEBUG
+			std::cout << "Found = true" << std::endl << std::endl;
+#endif
+            return next;
+		} else if (val < next->i->iName) {
+            next = next->left;
+        } else {
+            next = next->right;
+        }
+		i++;
+    }
+
+    //not found
+#ifdef DEBUG
+	std::cout << "Found = false" << std::endl << std::endl;
+#endif
+    return NULL;
+}
+
+
+
+
+
+
+KDGradientNode* newKDGradientNode(int sName, int iName, int obtain, int deliver)
+{
+	KDGradientNode* n = (KDGradientNode *)malloc(sizeof(KDGradientNode));
+	// we need to make it so that the same st cannot get created twice
+	// this is enforced in the same tree but not in different trees
+
+	n->key1 = InsertStateNode(&(rd->stateTree), sName)->s;
+	n->key2 = InsertInterfaceNode(&(rd->interfaceTree), iName)->i;
+	n->costToObtain = obtain;
+	n->costToDeliver = deliver;
+	n->deliveryReinforcement = false;
+	n->obtainReinforcement = false;
+	n->left = NULL;
+	n->right =NULL;
+	return n;
+}
+
+
+
+
+
+
+
+
+
+KDGradientNode* insertKDGradientNode( int sName, int iName, int costType, int pCost, KDGradientNode* treeNode, int lev )
+{
+	if ( treeNode == NULL )
+	{
+		switch ( costType )
+		{
+			case OBTAIN:
+				treeNode = newKDGradientNode(sName, iName, pCost, 9999);
+				break;
+			case DELIVER:
+				treeNode = newKDGradientNode(sName, iName, 9999, pCost);
+				break;
+			case REINFORCE_DELIVER:
+				treeNode = newKDGradientNode(sName, iName, 9999, 9999);
+				//treeNode->deliveryReinforcement = true;
+				//treeNode->key1->deliveryInterface = treeNode->key2;
+				add(&(treeNode->key1->deliveryInterfaces), treeNode->key2);
+				break;
+			case REINFORCE_OBTAIN:
+				treeNode = newKDGradientNode(sName, iName, 9999, 9999);
+				//treeNode->obtainReinforcement = true;
+				//treeNode->key1->obtainInterface = treeNode->key2;
+				add(&(treeNode->key1->obtainInterfaces), treeNode->key2);
+				break;
+		}
+
+	}
+	else
+	{
+		// all identical keys to the incoming keys
+		if ( sName == treeNode->key1->dataName
+			&& iName == treeNode->key2->iName )
+		{
+			// the node for these keys already exists
+			// overwrite of the data if better
+			switch ( costType )
+			{
+				case OBTAIN:
+					if ( pCost < treeNode->costToObtain )
+					{
+						treeNode->costToObtain = pCost;
+					}
+					break;
+				case DELIVER:
+					if ( pCost < treeNode->costToDeliver )
+					{
+						treeNode->costToDeliver = pCost;
+					}
+					break;
+				case REINFORCE_DELIVER:
+					//treeNode->deliveryReinforcement = true;
+					//treeNode->key1->deliveryInterface = treeNode->key2;
+					add(&(treeNode->key1->deliveryInterfaces), treeNode->key2);
+					break;
+				case REINFORCE_OBTAIN:
+					//treeNode->obtainReinforcement = true;
+					//treeNode->key1->obtainInterface = treeNode->key2;
+					add(&(treeNode->key1->obtainInterfaces), treeNode->key2);
+					break;
+			}
+		}
+		else
+		{
+			if ( lev == 0 )
+			{
+				if ( sName > treeNode->key1->dataName )
+				{
+					treeNode->right = insertKDGradientNode( sName, iName, costType, pCost, treeNode->right, (lev+1)%K );
+				}
+				else
+				{
+					treeNode->left  = insertKDGradientNode( sName, iName, costType, pCost, treeNode->left, (lev+1)%K );
+				}
+			}
+
+			if ( lev == 1 )
+			{
+				if ( iName > treeNode->key2->iName )
+				{
+					treeNode->right = insertKDGradientNode( sName, iName, costType, pCost, treeNode->right, (lev+1)%K );
+				}
+				else
+				{
+					treeNode->left  = insertKDGradientNode( sName, iName, costType, pCost, treeNode->left, (lev+1)%K );
+				}
+			}
+
+		}
+	}
+
+	switch ( costType )
+	{
+		case OBTAIN:
+		case REINFORCE_OBTAIN:
+			if ( !treeNode->key1->bestGradientToObtain
+				|| treeNode->costToObtain < treeNode->key1->bestGradientToObtain->costToObtain )
+			{
+				treeNode->key1->bestGradientToObtain = treeNode;
+				treeNode->key1->bestGradientToObtainUpdated = true;
+			}
+			break;
+		case DELIVER:
+		case REINFORCE_DELIVER:
+			if ( !treeNode->key1->bestGradientToDeliver
+				|| treeNode->costToDeliver < treeNode->key1->bestGradientToDeliver->costToDeliver )
+			{
+				treeNode->key1->bestGradientToDeliver = treeNode;
+				treeNode->key1->bestGradientToDeliverUpdated = true;
+			}
+			break;
+	}
+
+	return treeNode;
+}
+
+
+
+KDGradientNode* reinforceDeliverGradient(int sName, int iName)
+{
+	rd->grTree = insertKDGradientNode(sName, iName, REINFORCE_DELIVER, 0, rd->grTree, 0);
+	return rd->grTree;
+}
+
+
+KDGradientNode* reinforceObtainGradient(int sName, int iName)
+{
+	rd->grTree = insertKDGradientNode(sName, iName, REINFORCE_OBTAIN, 0, rd->grTree, 0);
+	return rd->grTree;
+}
+
+
+
+KDGradientNode* setObtainGradient(int sName, int iName, int pCost)
+{
+	rd->grTree = insertKDGradientNode(sName, iName, OBTAIN, pCost, rd->grTree, 0);
+	return rd->grTree;
+}
+
+
+KDGradientNode* setDeliverGradient(int sName, int iName, int pCost)
+{
+	rd->grTree = insertKDGradientNode(sName, iName, DELIVER, pCost, rd->grTree, 0);
+	return rd->grTree;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+KDNode* newKDNode(int keys[], int newStateName)
+{
+	KDNode* n = (KDNode *)malloc(sizeof(KDNode));
+	n->keys[0] = InsertStateNode(&(rd->stateTree), keys[0])->s;
+	n->keys[1] = InsertStateNode(&(rd->stateTree), keys[1])->s;
+	n->newState = InsertStateNode(&(rd->stateTree), newStateName)->s;
+	n->left = NULL;
+	n->right =NULL;
+	return n;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+KDNode* insertKDNode( int stateDataname[], int newStateName, KDNode* treeNode, int lev )
+{
+	int i;
+	if ( treeNode==NULL )
+	{
+		treeNode = newKDNode(stateDataname, newStateName);
+	}
+	else
+	{
+		// this line sets i == K if we have reached a node with
+		// all identical keys to the incoming keys
+		for ( i=0; i<K && stateDataname[i] == treeNode->keys[i]->dataName; i++ );
+		if ( i==K )
+		{
+			// we have found a duplicate node
+		}
+		else
+		{
+			if ( stateDataname[lev] > treeNode->keys[lev]->dataName )
+			{
+				treeNode->right = insertKDNode( stateDataname, newStateName, treeNode->right, (lev+1)%K );
+			}
+			else
+			{
+				treeNode->left  = insertKDNode( stateDataname, newStateName, treeNode->left, (lev+1)%K );
+			}
+		}
+	}
+	return treeNode;
+}
+
+
+
+KDGradientNode* SearchForKDGradientNode( int sName, int iName, KDGradientNode* treeNode)
+{
+	int lev, i;
+	for ( lev=0; treeNode != NULL; lev=(lev+1)%K )
+	{
+		// all identical keys to the incoming keys
+		if ( sName == treeNode->key1->dataName
+			&& iName == treeNode->key2->iName )
+		{
+#ifdef DEBUG
+			std::cout << "Found:     " << "(" << treeNode->keys[0]->dataName << ","
+				<< treeNode->keys[1]->dataName << "," << treeNode->newState->dataName << ")" << std::endl;
+#endif
+			return treeNode;
+		}
+
+		if ( lev == 0 )
+		{
+			if ( sName > treeNode->key1->dataName )
+			{
+				treeNode = treeNode->right;
+			}
+			else
+			{
+				treeNode = treeNode->left;
+			}
+		}
+
+		if ( lev == 1 )
+		{
+			if ( iName > treeNode->key2->iName )
+			{
+				treeNode = treeNode->right;
+			}
+			else
+			{
+				treeNode = treeNode->left;
+			}
+		}
+	}
+#ifdef DEBUG
+	std::cout << "NOT Found: " << "(" << stateDataname[0] << ","
+		<< stateDataname[1] << ")" << std::endl;
+#endif
+	return treeNode; // now NULL
+}
+
+
+
+
+KDNode* SearchForKDNode( int stateDataname[], KDNode* treeNode )
+{
+	int lev, i;
+	for ( lev=0; treeNode != NULL; lev=(lev+1)%K )
+	{
+		// this line sets i == K if we have reached a node with
+		// all identical keys to the incoming keys
+		for ( i=0; i<K && stateDataname[i] == treeNode->keys[i]->dataName; i++ );
+		if ( i==K )
+		{
+#ifdef DEBUG
+			std::cout << "Found:     " << "(" << treeNode->keys[0]->dataName << ","
+				<< treeNode->keys[1]->dataName << "," << treeNode->newState->dataName << ")" << std::endl;
+#endif
+			return treeNode;
+		}
+
+		if ( stateDataname[lev] > treeNode->keys[lev]->dataName )
+		{
+			treeNode = treeNode->right;
+		}
+		else
+		{
+			treeNode = treeNode->left;
+		}
+	}
+#ifdef DEBUG
+	std::cout << "NOT Found: " << "(" << stateDataname[0] << ","
+		<< stateDataname[1] << ")" << std::endl;
+#endif
+	return treeNode; // now NULL
+}
+
+
+int getNewState(int input)
+{
+	int keys[2];
+	keys[0] = input;
+	keys[1] = currentState;
+	KDNode* kdn = SearchForKDNode(keys, rd->kdRoot);
+	if ( kdn )
+	{
+		return (currentState = kdn->newState->dataName);
+	}
+	else
+	{
+		return input;
+	}
+
+}
+
+
+
+int SearchForKDNodeTransition(int input)
+{
+	int stateDataname[2];
+	stateDataname[0] = input;
+	stateDataname[1] = currentState;
+	KDNode* treeNode = rd->kdRoot;
+
+	int lev, i;
+	for ( lev=0; treeNode != NULL; lev=(lev+1)%K )
+	{
+		// this line sets i == K if we have reached a node with
+		// all identical keys to the incoming keys
+		for ( i=0; i<K && stateDataname[i] == treeNode->keys[i]->dataName; i++ );
+		if ( i==K )
+		{
+#ifdef DEBUG
+			std::cout << "(" << currentState << ")     " << input << "  --->  " << treeNode->newState->dataName << std::endl;
+#endif
+			return (currentState = treeNode->newState->dataName);
+		}
+
+		if ( stateDataname[lev] > treeNode->keys[lev]->dataName )
+		{
+			treeNode = treeNode->right;
+		}
+		else
+		{
+			treeNode = treeNode->left;
+		}
+	}
+#ifdef DEBUG
+	std::cout << "(" << currentState << ")     " << input << "  --->  " << input << std::endl;
+#endif
+	return input; // now NULL
+}
+
+
+
+
+ void PrepareKDNodeDisplayStream(KDNode** treeNode, int level, std::ostringstream* os)
+ {
+
+	 if (*treeNode == NULL)
+	 {
+		os[level] << "(-,-) ";
+		return;
+	 }
+	 else
+	 {
+		 os[level] << "(" << (*treeNode)->keys[0]->dataName << "," <<
+			 (*treeNode)->keys[1]->dataName << "," << (*treeNode)->newState->dataName << ") ";
+	 }
+
+	 PrepareKDNodeDisplayStream(&((*treeNode)->left), level+1, os);
+	 PrepareKDNodeDisplayStream(&((*treeNode)->right), level+1, os);
+ }
+
+
+
+ void PrepareKDGradientNodeDisplayStream(KDGradientNode** treeNode, int level, std::ostringstream* os)
+ {
+
+	 if (*treeNode == NULL)
+	 {
+		os[level] << "(-,-) ";
+		return;
+	 }
+	 else
+	 {
+		 os[level] << "(" << (*treeNode)->key1->dataName << "," <<
+			 (*treeNode)->key2->iName << "," << (*treeNode)->costToDeliver << ", " << (*treeNode)->costToObtain << ") ";
+	 }
+
+	 PrepareKDGradientNodeDisplayStream(&((*treeNode)->left), level+1, os);
+	 PrepareKDGradientNodeDisplayStream(&((*treeNode)->right), level+1, os);
+ }
+
+
+
+
+
+ void DisplayKDTree(KDNode** treeNode, std::ofstream& infile)
+ {
+	std::ostringstream os[MAXLEVELS];
+	PrepareKDNodeDisplayStream(treeNode, 0, os);
+	for ( int i = 0; i < MAXLEVELS; i++ )
+	{
+		infile << os[i].str() << std::endl;
+	}
+ }
+
+
+ void DisplayKDGradientTree(KDGradientNode** treeNode, std::ofstream& infile)
+ {
+	std::ostringstream os[MAXLEVELS];
+	PrepareKDGradientNodeDisplayStream(treeNode, 0, os);
+	for ( int i = 0; i < MAXLEVELS; i++ )
+	{
+		infile << os[i].str() << std::endl;
+	}
+ }
+
+
+void add(struct InterfaceList** l, Interface* _i)
+{
+	struct InterfaceList *temp,*r;
+	temp = *l;
+	if( *l == NULL )
+	{
+		temp = (struct InterfaceList *)malloc(sizeof(struct InterfaceList));
+		temp->i = _i;
+		temp->link = NULL;
+		*l = temp;
+	}
+	else
+	{
+		temp = *l;
+		while( temp->link !=NULL )
+		{
+			temp = temp->link;
+		}
+		r = (struct InterfaceList *)malloc(sizeof(struct InterfaceList));
+		r->i = _i;
+		r->link = NULL;
+		temp->link = r;
+	}
+}
+
+
+
+
+
+
+/* NEW STUFF TO BE ADDED TO OTHER VERSIONS*/
+
+
+
+
+void HandleIncomingData(int data, void forward_data(int interface), void handle_data(int data))
+{
+	StateNode* sn = FindStateNode(rd->stateTree, data);
+	InterfaceList* temp = sn->s->deliveryInterfaces;
+	while( temp !=NULL )
+	{
+		if ( temp->i->iName == SELF_INTERFACE )
+		{
+			handle_data(data);
+		}
+		else
+		{
+			forward_data(temp->i->iName);
+		}
+		temp = temp->link;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

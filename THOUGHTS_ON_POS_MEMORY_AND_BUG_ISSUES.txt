@@ -1,0 +1,45 @@
+
+
+
+
+Careful regarding using memory on the stack
+
+eg setting data member = a formal passed parameter etc etc
+
+don't set always allocate
+
+
+
+
+one case of key1 in gradient object being set to null!!
+
+
+problem with empty data string?
+
+
+t->s gets set to null?????
+
+them passed into gradient insertion/creation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

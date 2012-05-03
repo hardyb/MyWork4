@@ -1,0 +1,419 @@
+/*
+ * Copyright (c) 2007, Swedish Institute of Computer Science.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the Institute nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE INSTITUTE OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * This file is part of the Contiki operating system.
+ *
+ * $Id: example-broadcast.c,v 1.3 2010/11/06 15:03:48 adamdunkels Exp $
+ */
+
+/**
+ * \file
+ *         Testing the broadcast layer in Rime
+ * \author
+ *         Adam Dunkels <adam@sics.se>
+ */
+
+#include "contiki.h"
+#include "net/rime.h"
+#include "random.h"
+
+#include "dev/button-sensor.h"
+
+#include "dev/leds.h"
+
+#include <stdio.h>
+
+#include "RoutingAndAggregation.h"
+
+#define MAX_RETRANSMISSIONS 4
+#define NUM_HISTORY_ENTRIES 4
+
+
+static struct RoutingData moduleRD;
+
+static unsigned short if1;
+static unsigned short if2;
+static unsigned short u16;
+
+
+struct newNeighbor
+{
+struct newNeighbor* next;
+unsigned short interfaceName;
+};
+
+struct newMessage
+{
+struct newMessage* next;
+unsigned short interface;
+unsigned char message[4];
+};
+
+
+
+void (*h[4]) (newMessage* nm) = 
+{
+handle_advert, 
+handle_interest, 
+handle_reinforce, 
+handle_data
+};
+
+
+
+MEMB(newNeighbors_memb, struct newNeighbor, 20);
+MEMB(newMessages_memb, struct newMessage, 20);
+
+LIST(new_neighbors);
+LIST(new_messages);
+
+
+
+/* ========================================================================= */
+/* Declare processes */
+/* ========================================================================= */
+PROCESS(example_broadcast_process, "Broadcast example");
+PROCESS(runicast_process, "Runicast Process");
+PROCESS(handle_messages_process, "Message Process");
+AUTOSTART_PROCESSES(&example_broadcast_process, &runicast_process, &handle_messages_process);
+
+
+
+/* ========================================================================= */
+/* Connection structures */
+/* ========================================================================= */
+static struct broadcast_conn broadcast;
+static struct runicast_conn runicast;
+
+
+
+
+/* ========================================================================= */
+/* Call backs, Polls and other Functions */
+/* ========================================================================= */
+
+static void
+broadcast_recv(struct broadcast_conn *c, const rimeaddr_t *from)
+{
+  struct newNeighbor *n;
+
+  printf("broadcast message received from %d.%d: '%s'\n",
+         from->u8[0], from->u8[1], (char *)packetbuf_dataptr());
+
+u16 = ((int)from->u8[0] << 8) | (int)from->u8[1];
+
+/* Initially just asume its a neighbour message*/
+	InsertInterfaceNode(&(moduleRD.interfaceTree), u16);
+	printf("Inserted interface\n");
+
+/* Neighbour message was broadcast so tell them about us */
+    n = memb_alloc(&newNeighbors_memb);
+	n->interfaceName = u16;
+    list_add(new_neighbors, n);
+    printf("Added to list\n");
+ 
+
+}
+
+
+static void recv_runicast(struct runicast_conn *c, const rimeaddr_t *from, uint8_t seqno)
+{
+	printf("runicast message received from %d.%d, seqno %d\n", from->u8[0], from->u8[1], seqno);
+
+	u16 = ((int)from->u8[0] << 8) | (int)from->u8[1];
+
+	/* Initially just asume its a neighbour message*/
+	InsertInterfaceNode(&(moduleRD.interfaceTree), u16);
+	
+	printf("Inserted interface\n");
+
+	/* Neighbour message was direct so no need to tell them about us */
+
+	/* For the moment just return since the insert will be begnin*/
+	return;
+
+  
+	/*
+	struct history_entry *e = NULL;
+	for(e = list_head(history_table); e != NULL; e = e->next) 
+	{
+		if(rimeaddr_cmp(&e->addr, from)) 
+		{
+			break;
+		}
+	}
+
+	if(e == NULL) 
+	{
+		e = memb_alloc(&history_mem);
+		if(e == NULL) 
+		{
+			e = list_chop(history_table);
+		}
+		rimeaddr_copy(&e->addr, from);
+		e->seq = seqno;
+		list_push(history_table, e);
+	} 
+	else 
+	{
+		if(e->seq == seqno) 
+		{
+			printf("runicast message received from %d.%d, seqno %d (DUPLICATE)\n", from->u8[0], from->u8[1], seqno);
+			return;
+		}
+		e->seq = seqno;
+	}
+
+	printf("runicast message received from %d.%d, seqno %d\n", from->u8[0], from->u8[1], seqno);
+	*/
+
+}
+static void sent_runicast(struct runicast_conn *c, const rimeaddr_t *to, uint8_t retransmissions)
+{
+  printf("runicast message sent to %d.%d, retransmissions %d\n",
+	 to->u8[0], to->u8[1], retransmissions);
+}
+static void timedout_runicast(struct runicast_conn *c, const rimeaddr_t *to, uint8_t retransmissions)
+{
+  printf("runicast message timed out when sending to %d.%d, retransmissions %d\n",
+	 to->u8[0], to->u8[1], retransmissions);
+}
+
+
+
+static void handle_advert(newMessage* nm)
+{
+	if ( SearchForKDGradientNode(nm->message[1], SELF_INTERFACE, rd.grTree) )
+	{
+		return;
+	}
+
+	setObtainGradient(nm->message[1], nm->interface, sm.msgMinPathConstraint);
+
+	StateNode* n;
+	if ( (n = FindStateNode(m->moduleRD.stateTree, sm.data)) )
+	{
+		if ( n->s->bestGradientToObtainUpdated )
+		{
+			n->s->bestGradientToObtainUpdated = false;
+			TicTocMsg20* msg = MessageHelper::newMessage(ADVERTISE, sm.data, sm.hopCount, sm.msgMinPathConstraint+m->simpleNodeConstraintValue);
+			SendCopyToAllInterfaces(msg, sm.interface); // to all except sm.interface
+			delete msg;
+		}
+	}
+
+
+}
+
+
+static void
+messagehandler(void)
+{
+	static struct newMessage* mm;
+	static unsigned char msgType;
+
+	mm = list_pop(new_messages);
+	if ( mm != 0 )
+	{
+		printf("Processing a message\n");
+		msgType = mm->message[0];		
+		(*h[msgType]) (mm);
+		memb_free(&newMessages_memb, mm);
+	}
+
+  process_poll(&handle_messages_process);
+}
+
+
+/* ========================================================================= */
+/* Call back structures */
+/* ========================================================================= */
+static const struct broadcast_callbacks broadcast_call = {broadcast_recv};
+static const struct runicast_callbacks runicast_callbacks = {recv_runicast,
+							     sent_runicast,
+							     timedout_runicast};
+
+
+
+
+/* ========================================================================= */
+/* The actual processes */
+/* ========================================================================= */
+
+
+PROCESS_THREAD(handle_messages_process, ev, data)
+{
+  PROCESS_POLLHANDLER(messagehandler());
+  PROCESS_EXITHANDLER(exithandler());
+  PROCESS_BEGIN();
+
+  /*
+   * initializing  stuff
+   */
+
+  process_poll(&handle_messages_process);
+
+  PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_EXIT);
+  /*
+   * do any end bits
+   */
+  PROCESS_END();
+}
+
+
+
+
+PROCESS_THREAD(runicast_process, ev, data)
+{
+/*  static struct etimer et;*/
+  static rimeaddr_t recv;
+  static rimeaddr_t iface;
+  static struct newNeighbor* nn;
+  static struct etimer et;
+
+  PROCESS_EXITHANDLER(runicast_close(&runicast);)
+
+  PROCESS_BEGIN();
+  runicast_open(&runicast, 144, &runicast_callbacks);
+  printf("Opened runicast in runicast process\n");
+
+while(1)
+{
+	/*PROCESS_WAIT_UNTIL(list_length(new_neighbors) > 0 && !runicast_is_transmitting(&runicast));*/
+	etimer_set(&et, CLOCK_SECOND);
+    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+
+if ( !runicast_is_transmitting(&runicast) )/*list_length(new_neighbors) > 0*/
+{
+    printf("About to check list\n");
+	nn = list_pop(new_neighbors);
+	if ( nn != 0 )
+{
+    printf("About to runicast_send\n");
+	packetbuf_copyfrom("Hello", 5);
+
+	/* Will this work - interface name is just an unsigned short not a rime addr */
+	iface.u8[0] = (unsigned char)(nn->interfaceName >> 8);
+	iface.u8[1] = (unsigned char)(nn->interfaceName & 0xFF);
+	rimeaddr_copy(&recv, &iface); 
+
+	printf("%u.%u: sending runicast to address %u.%u\n",
+	rimeaddr_node_addr.u8[0],
+	rimeaddr_node_addr.u8[1],
+	recv.u8[0],
+	recv.u8[1]);
+
+	runicast_send(&runicast, &recv, MAX_RETRANSMISSIONS);
+	memb_free(&newNeighbors_memb, nn);
+}
+}
+
+}
+
+
+
+
+  PROCESS_END();
+}
+
+
+/*---------------------------------------------------------------------------*/
+PROCESS_THREAD(example_broadcast_process, ev, data)
+{
+  static struct etimer et;
+
+  PROCESS_EXITHANDLER(broadcast_close(&broadcast);)
+
+  PROCESS_BEGIN();
+	moduleRD.grTree = NULL;
+	moduleRD.interfaceTree = NULL;
+	moduleRD.stateTree = NULL;
+	moduleRD.kdRoot = NULL;
+	rd = &moduleRD;
+
+	if1 = 0;
+	if2 = 0;
+
+	broadcast_open(&broadcast, 129, &broadcast_call);
+
+	etimer_set(&et, CLOCK_SECOND);
+    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+
+	packetbuf_copyfrom("Hello", 5);
+	broadcast_send(&broadcast);
+	printf("broadcast message sent\n");
+
+  while(1) {
+
+    /* Delay 2-4 seconds */
+	etimer_set(&et, CLOCK_SECOND);
+
+    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+	/*PROCESS_WAIT_EVENT();*/
+    printf("Bcast Process timer expired\n");
+
+	struct InterfaceNode* i;
+	i = FindInterfaceNode(moduleRD.interfaceTree, 256);
+	if ( i )
+	{
+		printf("Found    : %u\n", i->i->iName);
+	}
+	else
+	{
+		printf("NOT Found: %u\n", i->i->iName);
+	}
+	
+	i = FindInterfaceNode(moduleRD.interfaceTree, 512);
+	if ( i )
+	{
+		printf("Found    : %u\n", i->i->iName);
+	}
+	else
+	{
+		printf("NOT Found: %u\n", i->i->iName);
+	}
+
+	i = FindInterfaceNode(moduleRD.interfaceTree, 768);
+	if ( i )
+	{
+		printf("Found    : %u\n", i->i->iName);
+	}
+	else
+	{
+		printf("NOT Found: %u\n", i->i->iName);
+	}
+
+
+
+    //packetbuf_copyfrom("Hello", 5);
+    //broadcast_send(&broadcast);
+  }
+
+  PROCESS_END();
+}
+/*---------------------------------------------------------------------------*/

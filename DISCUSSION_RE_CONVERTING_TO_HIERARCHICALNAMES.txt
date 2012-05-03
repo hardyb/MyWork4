@@ -1,0 +1,48 @@
+
+
+
+
+
+
+
+data message
+
+abc.def
+
+
+
+
+gradient
+ab.de
+
+trie_lookup_longest_prefix_extra2 matches that data message to that gradient
+
+
+so...
+eg with incoming advert
+
+this is to set up obtain gradients back to the source
+
+incoming may be: ab.cd
+
+we have already confirmed that cd is within (/one of) the setup contexts
+we have already set an obtain gradient for this state node
+( what does this mean in our new situation?                  
+A: 
+- add (or find if already there) this specific fully qualiified state to the trie
+- get a pointer to the trie node added/found
+- get the state object at that node
+- use the state object, incoming interface and path value to add/update the corresponding gradient
+ )
+
+
+now we want to find the matching state node
+( what does this mean in our new situation?                   
+A:
+
+
+
+
+)
+
+then check the 

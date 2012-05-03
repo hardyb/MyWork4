@@ -1,0 +1,44 @@
+
+
+
+
+
+
+
+reinf_req_time 
+set a time variable when first advert arrives at pub sink
+wait briefly until assume all gradient path values are in
+so definite best gradient is in
+
+
+
+
+
+
+now
+
+
+
+now - reinf_req_time = positive_longenough_wait
+
+now - 0 = same_as_now
+
+now - x = result
+
+
+if  ( now > result > timelimit )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

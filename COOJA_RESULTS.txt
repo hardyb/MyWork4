@@ -1,0 +1,1737 @@
+484	ID:2	Rime started with address 2.0
+493	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 2.
+509	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+511	ID:2	Starting 'Broadcast example'
+
+
+
+630	ID:1	Rime started with address 1.0
+640	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 1.
+
+
+
+645	ID:2	broadcast message sent
+
+
+655	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+657	ID:1	Starting 'Broadcast example'
+791	ID:1	broadcast message sent
+
+
+
+1147	ID:3	Rime started with address 3.0
+1157	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 3.
+1172	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+1174	ID:3	Starting 'Broadcast example'
+
+
+Node 1 records 3
+================
+1275	ID:1	broadcast message received from 3.0: 'Hello'
+1277	ID:1	Inserted interface
+1281	ID:1	1.0: sending runicast to address 3.0
+
+
+1308	ID:3	broadcast message sent
+
+
+Node 3 records 1
+================
+1543	ID:3	runicast message received from 1.0, seqno 0
+1544	ID:3	Inserted interface
+
+1650	ID:1	runicast message sent to 3.0, retransmissions 1
+
+Node 1 has 3
+============
+6592	ID:1	Found interface: 768
+6592	ID:1	In loop
+
+
+7264	ID:2	In loop
+
+
+
+Node 3 has 1
+============
+8749	ID:3	Found interface: 256
+8750	ID:3	In loop
+
+
+Node 1 has 3
+============
+13068	ID:1	Found interface: 768
+13069	ID:1	In loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======================================================================
+
+
+
+
+
+
+484	ID:2	Rime started with address 2.0
+493	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 2.
+509	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+511	ID:2	Starting 'Broadcast example'
+630	ID:1	Rime started with address 1.0
+640	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 1.
+645	ID:2	broadcast message sent
+655	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+657	ID:1	Starting 'Broadcast example'
+791	ID:1	broadcast message sent
+1147	ID:3	Rime started with address 3.0
+1157	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 3.
+1172	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+1174	ID:3	Starting 'Broadcast example'
+
+
+
+2 inserted 3
+1252	ID:2	broadcast message received from 3.0: 'Hello'
+1254	ID:2	Inserted interface
+1258	ID:2	2.0: sending runicast to address 3.0
+
+1 inserted 3
+1275	ID:1	broadcast message received from 3.0: 'Hello'
+1277	ID:1	Inserted interface
+
+
+
+1281	ID:1	1.0: sending runicast to address 3.0
+1308	ID:3	broadcast message sent
+
+3 inserted 1
+1543	ID:3	runicast message received from 1.0, seqno 0
+1544	ID:3	Inserted interface
+
+
+
+1650	ID:1	runicast message sent to 3.0, retransmissions 1
+
+
+3 inserted 2
+1792	ID:3	runicast message received from 2.0, seqno 0
+1793	ID:3	Inserted interface
+
+
+
+1877	ID:2	runicast message sent to 3.0, retransmissions 1
+
+6592	ID:1	Found interface: 768
+6592	ID:1	In loop
+
+7266	ID:2	Found interface: 768
+7266	ID:2	In loop
+
+8749	ID:3	Found interface: 512
+8750	ID:3	In loop
+
+
+
+3's broadcast arrived at 1 and 2 and they both responded with runicast
+3 then put them in its store
+
+all of this shows up, except 3 doesn't present with 1  -  possibly my debug code is flawed
+
+Also the broadcast messages from 1 & from 2 are not received by any one
+
+
+
+
+
+
+==================================================================
+NOW TRY AGAIN
+===================================================================
+
+143725	ID:1	Rime started with address 1.0
+143734	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 1.
+143750	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+143752	ID:1	Starting 'Broadcast example'
+143886	ID:1	broadcast message sent
+149685	ID:1	In loop
+154841	ID:1	In loop
+161317	ID:1	In loop
+167708	ID:1	In loop
+172731	ID:1	In loop
+175479	ID:2	Rime started with address 2.0
+175488	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 2.
+175503	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+175505	ID:2	Starting 'Broadcast example'
+175620	ID:1	broadcast message received from 2.0: 'Hello'
+175621	ID:1	Inserted interface
+175625	ID:1	1.0: sending runicast to address 2.0
+175639	ID:2	broadcast message sent
+175873	ID:2	runicast message received from 1.0, seqno 0
+175874	ID:2	Inserted interface
+175993	ID:1	runicast message sent to 2.0, retransmissions 1
+176733	ID:1	Found interface: 512
+176734	ID:1	In loop
+181718	ID:1	Found interface: 512
+181718	ID:1	In loop
+182260	ID:2	Found interface: 256
+182261	ID:2	In loop
+188830	ID:2	Found interface: 256
+188831	ID:2	In loop
+189460	ID:1	Found interface: 512
+189460	ID:1	In loop
+193440	ID:2	Found interface: 256
+193440	ID:2	In loop
+193804	ID:1	Found interface: 512
+193804	ID:1	In loop
+199718	ID:1	Found interface: 512
+199718	ID:1	In loop
+200307	ID:2	Found interface: 256
+200308	ID:2	In loop
+204796	ID:1	Found interface: 512
+204796	ID:1	In loop
+205276	ID:2	Found interface: 256
+205276	ID:2	In loop
+210757	ID:1	Found interface: 512
+210757	ID:1	In loop
+211315	ID:2	Found interface: 256
+211315	ID:2	In loop
+216944	ID:1	Found interface: 512
+216945	ID:1	In loop
+218018	ID:2	Found interface: 256
+218019	ID:2	In loop
+222373	ID:3	Rime started with address 3.0
+222382	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 3.
+222398	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+222400	ID:3	Starting 'Broadcast example'
+222493	ID:1	broadcast message received from 3.0: 'Hello'
+222494	ID:1	Inserted interface
+222498	ID:1	1.0: sending runicast to address 3.0
+222498	ID:2	broadcast message received from 3.0: 'Hello'
+222500	ID:2	Inserted interface
+222504	ID:2	2.0: sending runicast to address 3.0
+222533	ID:3	broadcast message sent
+222769	ID:3	runicast message received from 1.0, seqno 1
+222770	ID:3	Inserted interface
+222869	ID:1	runicast message sent to 3.0, retransmissions 1
+223019	ID:3	runicast message received from 2.0, seqno 0
+223020	ID:3	Inserted interface
+223121	ID:2	runicast message sent to 3.0, retransmissions 1
+223827	ID:1	Found interface: 768
+223828	ID:1	In loop
+225104	ID:2	Found interface: 768
+225104	ID:2	In loop
+229975	ID:3	Found interface: 512
+229975	ID:3	In loop
+231507	ID:1	Found interface: 768
+231507	ID:1	In loop
+231909	ID:2	Found interface: 768
+231909	ID:2	In loop
+237038	ID:1	Found interface: 768
+237039	ID:1	In loop
+237959	ID:3	Found interface: 512
+237960	ID:3	In loop
+238065	ID:2	Found interface: 768
+238065	ID:2	In loop
+244390	ID:1	Found interface: 768
+244390	ID:1	In loop
+244701	ID:3	Found interface: 512
+244702	ID:3	In loop
+245541	ID:2	Found interface: 768
+245542	ID:2	In loop
+250155	ID:1	Found interface: 768
+250156	ID:1	In loop
+252045	ID:3	Found interface: 512
+252046	ID:3	In loop
+252932	ID:2	Found interface: 768
+252933	ID:2	In loop
+255054	ID:1	Found interface: 768
+255054	ID:1	In loop
+256959	ID:3	Found interface: 512
+256960	ID:3	In loop
+258956	ID:2	Found interface: 768
+258956	ID:2	In loop
+261037	ID:3	Found interface: 512
+261038	ID:3	In loop
+261429	ID:1	Found interface: 768
+261429	ID:1	In loop
+263956	ID:2	Found interface: 768
+263956	ID:2	In loop
+265998	ID:3	Found interface: 512
+265999	ID:3	In loop
+268749	ID:1	Found interface: 768
+268750	ID:1	In loop
+269401	ID:2	Found interface: 768
+269401	ID:2	In loop
+271186	ID:3	Found interface: 512
+271186	ID:3	In loop
+275108	ID:1	Found interface: 768
+275109	ID:1	In loop
+275385	ID:2	Found interface: 768
+275386	ID:2	In loop
+277068	ID:3	Found interface: 512
+277069	ID:3	In loop
+280127	ID:2	Found interface: 768
+280128	ID:2	In loop
+280726	ID:1	Found interface: 768
+280726	ID:1	In loop
+282740	ID:3	Found interface: 512
+282741	ID:3	In loop
+285444	ID:1	Found interface: 768
+285445	ID:1	In loop
+285471	ID:2	Found interface: 768
+285472	ID:2	In loop
+289420	ID:3	Found interface: 512
+289421	ID:3	In loop
+292233	ID:1	Found interface: 768
+292234	ID:1	In loop
+292385	ID:2	Found interface: 768
+292386	ID:2	In loop
+293951	ID:3	Found interface: 512
+293952	ID:3	In loop
+296686	ID:1	Found interface: 768
+296687	ID:1	In loop
+298463	ID:2	Found interface: 768
+298464	ID:2	In loop
+300303	ID:3	Found interface: 512
+300303	ID:3	In loop
+302522	ID:1	Found interface: 768
+302523	ID:1	In loop
+305068	ID:3	Found interface: 512
+305069	ID:3	In loop
+305424	ID:2	Found interface: 768
+305425	ID:2	In loop
+307085	ID:1	Found interface: 768
+307085	ID:1	In loop
+312612	ID:2	Found interface: 768
+312612	ID:2	In loop
+312843	ID:1	Found interface: 768
+312843	ID:1	In loop
+312967	ID:3	Found interface: 512
+312967	ID:3	In loop
+316890	ID:1	Found interface: 768
+316890	ID:1	In loop
+318342	ID:3	Found interface: 512
+318342	ID:3	In loop
+320495	ID:2	Found interface: 768
+320495	ID:2	In loop
+322444	ID:1	Found interface: 768
+322445	ID:1	In loop
+
+
+
+
+
+
+
+======================================================================
+
+STUPID - I WASN'T COMPILING BUT WAS USING THE FIRST BUILD!!!!
+
+======================================================================
+
+
+
+426992	ID:1	Rime started with address 1.0
+427002	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 1.
+427017	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+427019	ID:1	Starting 'Broadcast example'
+427153	ID:1	broadcast message sent
+545815	ID:2	Rime started with address 2.0
+545824	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 2.
+545840	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+545842	ID:2	Starting 'Broadcast example'
+545887	ID:1	broadcast message received from 2.0: 'Hello'
+545888	ID:1	Inserted interface
+545892	ID:1	1.0: sending runicast to address 2.0
+545975	ID:2	broadcast message sent
+546585	ID:2	runicast message received from 1.0, seqno 0
+546586	ID:2	Inserted interface
+546636	ID:1	runicast message sent to 2.0, retransmissions 1
+670404	ID:3	Rime started with address 3.0
+670413	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 3.
+670429	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+670431	ID:3	Starting 'Broadcast example'
+670460	ID:2	broadcast message received from 3.0: 'Hello'
+670461	ID:2	Inserted interface
+670465	ID:2	2.0: sending runicast to address 3.0
+670512	ID:1	broadcast message received from 3.0: 'Hello'
+670513	ID:1	Inserted interface
+670517	ID:1	1.0: sending runicast to address 3.0
+670565	ID:3	broadcast message sent
+670800	ID:3	runicast message received from 1.0, seqno 1
+670802	ID:3	Inserted interface
+670887	ID:1	runicast message sent to 3.0, retransmissions 1
+671049	ID:3	runicast message received from 2.0, seqno 0
+671051	ID:3	Inserted interface
+671085	ID:2	runicast message sent to 3.0, retransmissions 1
+
+
+
+
+Starting up nodes one by one
+This all looks good now add back in the found output
+
+
+==========================================================
+
+
+
+741512	ID:1	Rime started with address 1.0
+741522	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 1.
+741537	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+741539	ID:1	Starting 'Broadcast example'
+741673	ID:1	broadcast message sent
+742668	ID:1	NOT Found: 16
+742670	ID:1	NOT Found: 16
+742671	ID:1	NOT Found: 16
+742672	ID:1	In loop
+743668	ID:1	NOT Found: 16
+743670	ID:1	NOT Found: 16
+743671	ID:1	NOT Found: 16
+743672	ID:1	In loop
+744668	ID:1	NOT Found: 16
+744670	ID:1	NOT Found: 16
+744671	ID:1	NOT Found: 16
+744672	ID:1	In loop
+745668	ID:1	NOT Found: 16
+745670	ID:1	NOT Found: 16
+745671	ID:1	NOT Found: 16
+745672	ID:1	In loop
+746668	ID:1	NOT Found: 16
+746670	ID:1	NOT Found: 16
+746671	ID:1	NOT Found: 16
+746672	ID:1	In loop
+747668	ID:1	NOT Found: 16
+747670	ID:1	NOT Found: 16
+747671	ID:1	NOT Found: 16
+747672	ID:1	In loop
+748668	ID:1	NOT Found: 16
+748670	ID:1	NOT Found: 16
+748671	ID:1	NOT Found: 16
+748672	ID:1	In loop
+749668	ID:1	NOT Found: 16
+749670	ID:1	NOT Found: 16
+749671	ID:1	NOT Found: 16
+749672	ID:1	In loop
+750668	ID:1	NOT Found: 16
+750670	ID:1	NOT Found: 16
+750671	ID:1	NOT Found: 16
+750672	ID:1	In loop
+751668	ID:1	NOT Found: 16
+751670	ID:1	NOT Found: 16
+751671	ID:1	NOT Found: 16
+751672	ID:1	In loop
+752668	ID:1	NOT Found: 16
+752670	ID:1	NOT Found: 16
+752671	ID:1	NOT Found: 16
+752672	ID:1	In loop
+753668	ID:1	NOT Found: 16
+753670	ID:1	NOT Found: 16
+753671	ID:1	NOT Found: 16
+753672	ID:1	In loop
+754668	ID:1	NOT Found: 16
+754670	ID:1	NOT Found: 16
+754671	ID:1	NOT Found: 16
+754672	ID:1	In loop
+755668	ID:1	NOT Found: 16
+755670	ID:1	NOT Found: 16
+755671	ID:1	NOT Found: 16
+755672	ID:1	In loop
+756668	ID:1	NOT Found: 16
+756670	ID:1	NOT Found: 16
+756671	ID:1	NOT Found: 16
+756672	ID:1	In loop
+757668	ID:1	NOT Found: 16
+757670	ID:1	NOT Found: 16
+757671	ID:1	NOT Found: 16
+757672	ID:1	In loop
+758668	ID:1	NOT Found: 16
+758670	ID:1	NOT Found: 16
+758671	ID:1	NOT Found: 16
+758672	ID:1	In loop
+759668	ID:1	NOT Found: 16
+759670	ID:1	NOT Found: 16
+759671	ID:1	NOT Found: 16
+759672	ID:1	In loop
+760668	ID:1	NOT Found: 16
+760670	ID:1	NOT Found: 16
+760671	ID:1	NOT Found: 16
+760672	ID:1	In loop
+761668	ID:1	NOT Found: 16
+761670	ID:1	NOT Found: 16
+761671	ID:1	NOT Found: 16
+761672	ID:1	In loop
+762668	ID:1	NOT Found: 16
+762670	ID:1	NOT Found: 16
+762671	ID:1	NOT Found: 16
+762672	ID:1	In loop
+763668	ID:1	NOT Found: 16
+763670	ID:1	NOT Found: 16
+763671	ID:1	NOT Found: 16
+763672	ID:1	In loop
+764668	ID:1	NOT Found: 16
+764670	ID:1	NOT Found: 16
+764671	ID:1	NOT Found: 16
+764672	ID:1	In loop
+765668	ID:1	NOT Found: 16
+765670	ID:1	NOT Found: 16
+765671	ID:1	NOT Found: 16
+765672	ID:1	In loop
+766668	ID:1	NOT Found: 16
+766670	ID:1	NOT Found: 16
+766671	ID:1	NOT Found: 16
+766672	ID:1	In loop
+767668	ID:1	NOT Found: 16
+767670	ID:1	NOT Found: 16
+767671	ID:1	NOT Found: 16
+767672	ID:1	In loop
+768668	ID:1	NOT Found: 16
+768670	ID:1	NOT Found: 16
+768671	ID:1	NOT Found: 16
+768672	ID:1	In loop
+769668	ID:1	NOT Found: 16
+769670	ID:1	NOT Found: 16
+769671	ID:1	NOT Found: 16
+769672	ID:1	In loop
+770668	ID:1	NOT Found: 16
+770670	ID:1	NOT Found: 16
+770671	ID:1	NOT Found: 16
+770672	ID:1	In loop
+771668	ID:1	NOT Found: 16
+771670	ID:1	NOT Found: 16
+771671	ID:1	NOT Found: 16
+771672	ID:1	In loop
+772668	ID:1	NOT Found: 16
+772670	ID:1	NOT Found: 16
+772671	ID:1	NOT Found: 16
+772672	ID:1	In loop
+773544	ID:2	Rime started with address 2.0
+773553	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 2.
+773568	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+773571	ID:2	Starting 'Broadcast example'
+773656	ID:1	broadcast message received from 2.0: 'Hello'
+773658	ID:1	Inserted interface
+773662	ID:1	1.0: sending runicast to address 2.0
+773668	ID:1	NOT Found: 16
+773670	ID:1	Found    : 512
+773672	ID:1	NOT Found: 16
+773672	ID:1	In loop
+773704	ID:2	broadcast message sent
+773938	ID:2	runicast message received from 1.0, seqno 0
+773940	ID:2	Inserted interface
+774032	ID:1	runicast message sent to 2.0, retransmissions 1
+774668	ID:1	NOT Found: 16
+774670	ID:1	Found    : 512
+774672	ID:1	NOT Found: 16
+774672	ID:1	In loop
+774700	ID:2	Found    : 256
+774701	ID:2	NOT Found: 16
+774703	ID:2	NOT Found: 16
+774704	ID:2	In loop
+775668	ID:1	NOT Found: 16
+775670	ID:1	Found    : 512
+775672	ID:1	NOT Found: 16
+775672	ID:1	In loop
+775700	ID:2	Found    : 256
+775701	ID:2	NOT Found: 16
+775703	ID:2	NOT Found: 16
+775704	ID:2	In loop
+776668	ID:1	NOT Found: 16
+776670	ID:1	Found    : 512
+776672	ID:1	NOT Found: 16
+776672	ID:1	In loop
+776700	ID:2	Found    : 256
+776701	ID:2	NOT Found: 16
+776703	ID:2	NOT Found: 16
+776704	ID:2	In loop
+777668	ID:1	NOT Found: 16
+777670	ID:1	Found    : 512
+777672	ID:1	NOT Found: 16
+777672	ID:1	In loop
+777700	ID:2	Found    : 256
+777701	ID:2	NOT Found: 16
+777703	ID:2	NOT Found: 16
+777704	ID:2	In loop
+778668	ID:1	NOT Found: 16
+778670	ID:1	Found    : 512
+778672	ID:1	NOT Found: 16
+778672	ID:1	In loop
+778700	ID:2	Found    : 256
+778701	ID:2	NOT Found: 16
+778703	ID:2	NOT Found: 16
+778704	ID:2	In loop
+779668	ID:1	NOT Found: 16
+779670	ID:1	Found    : 512
+779672	ID:1	NOT Found: 16
+779672	ID:1	In loop
+779700	ID:2	Found    : 256
+779701	ID:2	NOT Found: 16
+779703	ID:2	NOT Found: 16
+779704	ID:2	In loop
+780668	ID:1	NOT Found: 16
+780670	ID:1	Found    : 512
+780672	ID:1	NOT Found: 16
+780672	ID:1	In loop
+780700	ID:2	Found    : 256
+780701	ID:2	NOT Found: 16
+780703	ID:2	NOT Found: 16
+780704	ID:2	In loop
+781668	ID:1	NOT Found: 16
+781670	ID:1	Found    : 512
+781672	ID:1	NOT Found: 16
+781672	ID:1	In loop
+781700	ID:2	Found    : 256
+781701	ID:2	NOT Found: 16
+781703	ID:2	NOT Found: 16
+781704	ID:2	In loop
+782668	ID:1	NOT Found: 16
+782670	ID:1	Found    : 512
+782672	ID:1	NOT Found: 16
+782672	ID:1	In loop
+782700	ID:2	Found    : 256
+782701	ID:2	NOT Found: 16
+782703	ID:2	NOT Found: 16
+782704	ID:2	In loop
+783668	ID:1	NOT Found: 16
+783670	ID:1	Found    : 512
+783672	ID:1	NOT Found: 16
+783672	ID:1	In loop
+783700	ID:2	Found    : 256
+783701	ID:2	NOT Found: 16
+783703	ID:2	NOT Found: 16
+783704	ID:2	In loop
+784668	ID:1	NOT Found: 16
+784670	ID:1	Found    : 512
+784672	ID:1	NOT Found: 16
+784672	ID:1	In loop
+784700	ID:2	Found    : 256
+784701	ID:2	NOT Found: 16
+784703	ID:2	NOT Found: 16
+784704	ID:2	In loop
+785668	ID:1	NOT Found: 16
+785670	ID:1	Found    : 512
+785672	ID:1	NOT Found: 16
+785672	ID:1	In loop
+785700	ID:2	Found    : 256
+785701	ID:2	NOT Found: 16
+785703	ID:2	NOT Found: 16
+785704	ID:2	In loop
+786668	ID:1	NOT Found: 16
+786670	ID:1	Found    : 512
+786672	ID:1	NOT Found: 16
+786672	ID:1	In loop
+786700	ID:2	Found    : 256
+786701	ID:2	NOT Found: 16
+786703	ID:2	NOT Found: 16
+786704	ID:2	In loop
+787668	ID:1	NOT Found: 16
+787670	ID:1	Found    : 512
+787672	ID:1	NOT Found: 16
+787672	ID:1	In loop
+787700	ID:2	Found    : 256
+787701	ID:2	NOT Found: 16
+787703	ID:2	NOT Found: 16
+787704	ID:2	In loop
+788668	ID:1	NOT Found: 16
+788670	ID:1	Found    : 512
+788672	ID:1	NOT Found: 16
+788672	ID:1	In loop
+788700	ID:2	Found    : 256
+788701	ID:2	NOT Found: 16
+788703	ID:2	NOT Found: 16
+788704	ID:2	In loop
+789668	ID:1	NOT Found: 16
+789670	ID:1	Found    : 512
+789672	ID:1	NOT Found: 16
+789672	ID:1	In loop
+789700	ID:2	Found    : 256
+789701	ID:2	NOT Found: 16
+789703	ID:2	NOT Found: 16
+789704	ID:2	In loop
+790668	ID:1	NOT Found: 16
+790670	ID:1	Found    : 512
+790672	ID:1	NOT Found: 16
+790672	ID:1	In loop
+790700	ID:2	Found    : 256
+790701	ID:2	NOT Found: 16
+790703	ID:2	NOT Found: 16
+790704	ID:2	In loop
+791668	ID:1	NOT Found: 16
+791670	ID:1	Found    : 512
+791672	ID:1	NOT Found: 16
+791672	ID:1	In loop
+791700	ID:2	Found    : 256
+791701	ID:2	NOT Found: 16
+791703	ID:2	NOT Found: 16
+791704	ID:2	In loop
+792668	ID:1	NOT Found: 16
+792670	ID:1	Found    : 512
+792672	ID:1	NOT Found: 16
+792672	ID:1	In loop
+792700	ID:2	Found    : 256
+792701	ID:2	NOT Found: 16
+792703	ID:2	NOT Found: 16
+792704	ID:2	In loop
+793668	ID:1	NOT Found: 16
+793670	ID:1	Found    : 512
+793672	ID:1	NOT Found: 16
+793672	ID:1	In loop
+793700	ID:2	Found    : 256
+793701	ID:2	NOT Found: 16
+793703	ID:2	NOT Found: 16
+793704	ID:2	In loop
+794668	ID:1	NOT Found: 16
+794670	ID:1	Found    : 512
+794672	ID:1	NOT Found: 16
+794672	ID:1	In loop
+794700	ID:2	Found    : 256
+794701	ID:2	NOT Found: 16
+794703	ID:2	NOT Found: 16
+794704	ID:2	In loop
+795668	ID:1	NOT Found: 16
+795670	ID:1	Found    : 512
+795672	ID:1	NOT Found: 16
+795672	ID:1	In loop
+795700	ID:2	Found    : 256
+795701	ID:2	NOT Found: 16
+795703	ID:2	NOT Found: 16
+795704	ID:2	In loop
+796668	ID:1	NOT Found: 16
+796670	ID:1	Found    : 512
+796672	ID:1	NOT Found: 16
+796672	ID:1	In loop
+796700	ID:2	Found    : 256
+796701	ID:2	NOT Found: 16
+796703	ID:2	NOT Found: 16
+796704	ID:2	In loop
+797344	ID:3	Rime started with address 3.0
+797353	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 3.
+797368	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+797371	ID:3	Starting 'Broadcast example'
+797407	ID:1	broadcast message received from 3.0: 'Hello'
+797409	ID:1	Inserted interface
+797413	ID:1	1.0: sending runicast to address 3.0
+797438	ID:2	broadcast message received from 3.0: 'Hello'
+797439	ID:2	Inserted interface
+797443	ID:2	2.0: sending runicast to address 3.0
+797504	ID:3	broadcast message sent
+797668	ID:1	NOT Found: 16
+797670	ID:1	Found    : 512
+797672	ID:1	Found    : 768
+797673	ID:1	In loop
+797701	ID:2	Found    : 256
+797702	ID:2	NOT Found: 16
+797704	ID:2	Found    : 768
+797705	ID:2	In loop
+797865	ID:3	runicast message received from 1.0, seqno 1
+797866	ID:3	Inserted interface
+797905	ID:1	runicast message sent to 3.0, retransmissions 1
+798239	ID:3	runicast message received from 2.0, seqno 0
+798240	ID:3	Inserted interface
+798312	ID:2	runicast message sent to 3.0, retransmissions 1
+798500	ID:3	Found    : 256
+798502	ID:3	Found    : 512
+798503	ID:3	NOT Found: 16
+798504	ID:3	In loop
+798668	ID:1	NOT Found: 16
+798670	ID:1	Found    : 512
+798672	ID:1	Found    : 768
+798673	ID:1	In loop
+798700	ID:2	Found    : 256
+798701	ID:2	NOT Found: 16
+798703	ID:2	Found    : 768
+798704	ID:2	In loop
+799500	ID:3	Found    : 256
+799502	ID:3	Found    : 512
+799503	ID:3	NOT Found: 16
+799504	ID:3	In loop
+799668	ID:1	NOT Found: 16
+799670	ID:1	Found    : 512
+799672	ID:1	Found    : 768
+799673	ID:1	In loop
+799700	ID:2	Found    : 256
+799701	ID:2	NOT Found: 16
+799703	ID:2	Found    : 768
+799704	ID:2	In loop
+800500	ID:3	Found    : 256
+800502	ID:3	Found    : 512
+800503	ID:3	NOT Found: 16
+800504	ID:3	In loop
+800668	ID:1	NOT Found: 16
+800670	ID:1	Found    : 512
+800672	ID:1	Found    : 768
+800673	ID:1	In loop
+800700	ID:2	Found    : 256
+800701	ID:2	NOT Found: 16
+800703	ID:2	Found    : 768
+800704	ID:2	In loop
+801500	ID:3	Found    : 256
+801502	ID:3	Found    : 512
+801503	ID:3	NOT Found: 16
+801504	ID:3	In loop
+801668	ID:1	NOT Found: 16
+801670	ID:1	Found    : 512
+801672	ID:1	Found    : 768
+801673	ID:1	In loop
+801700	ID:2	Found    : 256
+801701	ID:2	NOT Found: 16
+801703	ID:2	Found    : 768
+801704	ID:2	In loop
+802500	ID:3	Found    : 256
+802502	ID:3	Found    : 512
+802503	ID:3	NOT Found: 16
+802504	ID:3	In loop
+802668	ID:1	NOT Found: 16
+802670	ID:1	Found    : 512
+802672	ID:1	Found    : 768
+802673	ID:1	In loop
+802700	ID:2	Found    : 256
+802701	ID:2	NOT Found: 16
+802703	ID:2	Found    : 768
+802704	ID:2	In loop
+803500	ID:3	Found    : 256
+803502	ID:3	Found    : 512
+803503	ID:3	NOT Found: 16
+803504	ID:3	In loop
+803668	ID:1	NOT Found: 16
+803670	ID:1	Found    : 512
+803672	ID:1	Found    : 768
+803673	ID:1	In loop
+803700	ID:2	Found    : 256
+803701	ID:2	NOT Found: 16
+803703	ID:2	Found    : 768
+803704	ID:2	In loop
+804500	ID:3	Found    : 256
+804502	ID:3	Found    : 512
+804503	ID:3	NOT Found: 16
+804504	ID:3	In loop
+804668	ID:1	NOT Found: 16
+804670	ID:1	Found    : 512
+804672	ID:1	Found    : 768
+804673	ID:1	In loop
+804700	ID:2	Found    : 256
+804701	ID:2	NOT Found: 16
+804703	ID:2	Found    : 768
+804704	ID:2	In loop
+805500	ID:3	Found    : 256
+805502	ID:3	Found    : 512
+805503	ID:3	NOT Found: 16
+805504	ID:3	In loop
+805668	ID:1	NOT Found: 16
+805670	ID:1	Found    : 512
+805672	ID:1	Found    : 768
+805673	ID:1	In loop
+805700	ID:2	Found    : 256
+805701	ID:2	NOT Found: 16
+805703	ID:2	Found    : 768
+805704	ID:2	In loop
+806500	ID:3	Found    : 256
+806502	ID:3	Found    : 512
+806503	ID:3	NOT Found: 16
+806504	ID:3	In loop
+806668	ID:1	NOT Found: 16
+806670	ID:1	Found    : 512
+806672	ID:1	Found    : 768
+806673	ID:1	In loop
+806700	ID:2	Found    : 256
+806701	ID:2	NOT Found: 16
+806703	ID:2	Found    : 768
+806704	ID:2	In loop
+807500	ID:3	Found    : 256
+807502	ID:3	Found    : 512
+807503	ID:3	NOT Found: 16
+807504	ID:3	In loop
+807668	ID:1	NOT Found: 16
+807670	ID:1	Found    : 512
+807672	ID:1	Found    : 768
+807673	ID:1	In loop
+807700	ID:2	Found    : 256
+807701	ID:2	NOT Found: 16
+807703	ID:2	Found    : 768
+807704	ID:2	In loop
+808500	ID:3	Found    : 256
+808502	ID:3	Found    : 512
+808503	ID:3	NOT Found: 16
+808504	ID:3	In loop
+808668	ID:1	NOT Found: 16
+808670	ID:1	Found    : 512
+808672	ID:1	Found    : 768
+808673	ID:1	In loop
+808700	ID:2	Found    : 256
+808701	ID:2	NOT Found: 16
+808703	ID:2	Found    : 768
+808704	ID:2	In loop
+809500	ID:3	Found    : 256
+809502	ID:3	Found    : 512
+809503	ID:3	NOT Found: 16
+809504	ID:3	In loop
+809668	ID:1	NOT Found: 16
+809670	ID:1	Found    : 512
+809672	ID:1	Found    : 768
+809673	ID:1	In loop
+809700	ID:2	Found    : 256
+809701	ID:2	NOT Found: 16
+809703	ID:2	Found    : 768
+809704	ID:2	In loop
+810500	ID:3	Found    : 256
+810502	ID:3	Found    : 512
+810503	ID:3	NOT Found: 16
+810504	ID:3	In loop
+810668	ID:1	NOT Found: 16
+810670	ID:1	Found    : 512
+810672	ID:1	Found    : 768
+810673	ID:1	In loop
+810700	ID:2	Found    : 256
+810701	ID:2	NOT Found: 16
+810703	ID:2	Found    : 768
+810704	ID:2	In loop
+811500	ID:3	Found    : 256
+811502	ID:3	Found    : 512
+811503	ID:3	NOT Found: 16
+811504	ID:3	In loop
+811668	ID:1	NOT Found: 16
+811670	ID:1	Found    : 512
+811672	ID:1	Found    : 768
+811673	ID:1	In loop
+811700	ID:2	Found    : 256
+811701	ID:2	NOT Found: 16
+811703	ID:2	Found    : 768
+811704	ID:2	In loop
+812500	ID:3	Found    : 256
+812502	ID:3	Found    : 512
+812503	ID:3	NOT Found: 16
+812504	ID:3	In loop
+812668	ID:1	NOT Found: 16
+812670	ID:1	Found    : 512
+812672	ID:1	Found    : 768
+812673	ID:1	In loop
+812700	ID:2	Found    : 256
+812701	ID:2	NOT Found: 16
+812703	ID:2	Found    : 768
+812704	ID:2	In loop
+813500	ID:3	Found    : 256
+813502	ID:3	Found    : 512
+813503	ID:3	NOT Found: 16
+813504	ID:3	In loop
+813668	ID:1	NOT Found: 16
+813670	ID:1	Found    : 512
+813672	ID:1	Found    : 768
+813673	ID:1	In loop
+813700	ID:2	Found    : 256
+813701	ID:2	NOT Found: 16
+813703	ID:2	Found    : 768
+813704	ID:2	In loop
+814500	ID:3	Found    : 256
+814502	ID:3	Found    : 512
+814503	ID:3	NOT Found: 16
+814504	ID:3	In loop
+814668	ID:1	NOT Found: 16
+814670	ID:1	Found    : 512
+814672	ID:1	Found    : 768
+814673	ID:1	In loop
+814700	ID:2	Found    : 256
+814701	ID:2	NOT Found: 16
+814703	ID:2	Found    : 768
+814704	ID:2	In loop
+815500	ID:3	Found    : 256
+815502	ID:3	Found    : 512
+815503	ID:3	NOT Found: 16
+815504	ID:3	In loop
+815668	ID:1	NOT Found: 16
+815670	ID:1	Found    : 512
+815672	ID:1	Found    : 768
+815673	ID:1	In loop
+815700	ID:2	Found    : 256
+815701	ID:2	NOT Found: 16
+815703	ID:2	Found    : 768
+815704	ID:2	In loop
+816500	ID:3	Found    : 256
+816502	ID:3	Found    : 512
+816503	ID:3	NOT Found: 16
+816504	ID:3	In loop
+816668	ID:1	NOT Found: 16
+816670	ID:1	Found    : 512
+816672	ID:1	Found    : 768
+816673	ID:1	In loop
+816700	ID:2	Found    : 256
+816701	ID:2	NOT Found: 16
+816703	ID:2	Found    : 768
+816704	ID:2	In loop
+817500	ID:3	Found    : 256
+817502	ID:3	Found    : 512
+817503	ID:3	NOT Found: 16
+817504	ID:3	In loop
+817668	ID:1	NOT Found: 16
+817670	ID:1	Found    : 512
+817672	ID:1	Found    : 768
+817673	ID:1	In loop
+817700	ID:2	Found    : 256
+817701	ID:2	NOT Found: 16
+817703	ID:2	Found    : 768
+817704	ID:2	In loop
+818500	ID:3	Found    : 256
+818502	ID:3	Found    : 512
+818503	ID:3	NOT Found: 16
+818504	ID:3	In loop
+818668	ID:1	NOT Found: 16
+818670	ID:1	Found    : 512
+818672	ID:1	Found    : 768
+818673	ID:1	In loop
+818700	ID:2	Found    : 256
+818701	ID:2	NOT Found: 16
+818703	ID:2	Found    : 768
+818704	ID:2	In loop
+819500	ID:3	Found    : 256
+819502	ID:3	Found    : 512
+819503	ID:3	NOT Found: 16
+819504	ID:3	In loop
+819668	ID:1	NOT Found: 16
+819670	ID:1	Found    : 512
+819672	ID:1	Found    : 768
+819673	ID:1	In loop
+819700	ID:2	Found    : 256
+819701	ID:2	NOT Found: 16
+819703	ID:2	Found    : 768
+819704	ID:2	In loop
+820500	ID:3	Found    : 256
+820502	ID:3	Found    : 512
+820503	ID:3	NOT Found: 16
+820504	ID:3	In loop
+820668	ID:1	NOT Found: 16
+820670	ID:1	Found    : 512
+820672	ID:1	Found    : 768
+820673	ID:1	In loop
+820700	ID:2	Found    : 256
+820701	ID:2	NOT Found: 16
+820703	ID:2	Found    : 768
+820704	ID:2	In loop
+821500	ID:3	Found    : 256
+821502	ID:3	Found    : 512
+821503	ID:3	NOT Found: 16
+821504	ID:3	In loop
+821668	ID:1	NOT Found: 16
+821670	ID:1	Found    : 512
+821672	ID:1	Found    : 768
+821673	ID:1	In loop
+821700	ID:2	Found    : 256
+821701	ID:2	NOT Found: 16
+821703	ID:2	Found    : 768
+821704	ID:2	In loop
+822500	ID:3	Found    : 256
+822502	ID:3	Found    : 512
+822503	ID:3	NOT Found: 16
+822504	ID:3	In loop
+822668	ID:1	NOT Found: 16
+822670	ID:1	Found    : 512
+822672	ID:1	Found    : 768
+822673	ID:1	In loop
+822700	ID:2	Found    : 256
+822701	ID:2	NOT Found: 16
+822703	ID:2	Found    : 768
+822704	ID:2	In loop
+823500	ID:3	Found    : 256
+823502	ID:3	Found    : 512
+823503	ID:3	NOT Found: 16
+823504	ID:3	In loop
+823668	ID:1	NOT Found: 16
+823670	ID:1	Found    : 512
+823672	ID:1	Found    : 768
+823673	ID:1	In loop
+823700	ID:2	Found    : 256
+823701	ID:2	NOT Found: 16
+823703	ID:2	Found    : 768
+823704	ID:2	In loop
+824500	ID:3	Found    : 256
+824502	ID:3	Found    : 512
+824503	ID:3	NOT Found: 16
+824504	ID:3	In loop
+824668	ID:1	NOT Found: 16
+824670	ID:1	Found    : 512
+824672	ID:1	Found    : 768
+824673	ID:1	In loop
+824700	ID:2	Found    : 256
+824701	ID:2	NOT Found: 16
+824703	ID:2	Found    : 768
+824704	ID:2	In loop
+825500	ID:3	Found    : 256
+825502	ID:3	Found    : 512
+825503	ID:3	NOT Found: 16
+825504	ID:3	In loop
+825668	ID:1	NOT Found: 16
+825670	ID:1	Found    : 512
+825672	ID:1	Found    : 768
+825673	ID:1	In loop
+825700	ID:2	Found    : 256
+825701	ID:2	NOT Found: 16
+825703	ID:2	Found    : 768
+825704	ID:2	In loop
+826500	ID:3	Found    : 256
+826502	ID:3	Found    : 512
+826503	ID:3	NOT Found: 16
+826504	ID:3	In loop
+826668	ID:1	NOT Found: 16
+826670	ID:1	Found    : 512
+826672	ID:1	Found    : 768
+826673	ID:1	In loop
+826700	ID:2	Found    : 256
+826701	ID:2	NOT Found: 16
+826703	ID:2	Found    : 768
+826704	ID:2	In loop
+827500	ID:3	Found    : 256
+827502	ID:3	Found    : 512
+827503	ID:3	NOT Found: 16
+827504	ID:3	In loop
+827668	ID:1	NOT Found: 16
+827670	ID:1	Found    : 512
+827672	ID:1	Found    : 768
+827673	ID:1	In loop
+827700	ID:2	Found    : 256
+827701	ID:2	NOT Found: 16
+827703	ID:2	Found    : 768
+827704	ID:2	In loop
+828500	ID:3	Found    : 256
+828502	ID:3	Found    : 512
+828503	ID:3	NOT Found: 16
+828504	ID:3	In loop
+828668	ID:1	NOT Found: 16
+828670	ID:1	Found    : 512
+828672	ID:1	Found    : 768
+828673	ID:1	In loop
+828700	ID:2	Found    : 256
+828701	ID:2	NOT Found: 16
+828703	ID:2	Found    : 768
+828704	ID:2	In loop
+829500	ID:3	Found    : 256
+829502	ID:3	Found    : 512
+829503	ID:3	NOT Found: 16
+829504	ID:3	In loop
+829668	ID:1	NOT Found: 16
+829670	ID:1	Found    : 512
+829672	ID:1	Found    : 768
+829673	ID:1	In loop
+829700	ID:2	Found    : 256
+829701	ID:2	NOT Found: 16
+829703	ID:2	Found    : 768
+829704	ID:2	In loop
+830500	ID:3	Found    : 256
+830502	ID:3	Found    : 512
+830503	ID:3	NOT Found: 16
+830504	ID:3	In loop
+830668	ID:1	NOT Found: 16
+830670	ID:1	Found    : 512
+830672	ID:1	Found    : 768
+830673	ID:1	In loop
+830700	ID:2	Found    : 256
+830701	ID:2	NOT Found: 16
+830703	ID:2	Found    : 768
+830704	ID:2	In loop
+831500	ID:3	Found    : 256
+831502	ID:3	Found    : 512
+831503	ID:3	NOT Found: 16
+831504	ID:3	In loop
+831668	ID:1	NOT Found: 16
+831670	ID:1	Found    : 512
+831672	ID:1	Found    : 768
+831673	ID:1	In loop
+831700	ID:2	Found    : 256
+831701	ID:2	NOT Found: 16
+831703	ID:2	Found    : 768
+831704	ID:2	In loop
+832500	ID:3	Found    : 256
+832502	ID:3	Found    : 512
+832503	ID:3	NOT Found: 16
+832504	ID:3	In loop
+832668	ID:1	NOT Found: 16
+832670	ID:1	Found    : 512
+832672	ID:1	Found    : 768
+832673	ID:1	In loop
+832700	ID:2	Found    : 256
+832701	ID:2	NOT Found: 16
+832703	ID:2	Found    : 768
+832704	ID:2	In loop
+833500	ID:3	Found    : 256
+833502	ID:3	Found    : 512
+833503	ID:3	NOT Found: 16
+833504	ID:3	In loop
+833668	ID:1	NOT Found: 16
+833670	ID:1	Found    : 512
+833672	ID:1	Found    : 768
+833673	ID:1	In loop
+833700	ID:2	Found    : 256
+833701	ID:2	NOT Found: 16
+833703	ID:2	Found    : 768
+833704	ID:2	In loop
+834500	ID:3	Found    : 256
+834502	ID:3	Found    : 512
+834503	ID:3	NOT Found: 16
+834504	ID:3	In loop
+834668	ID:1	NOT Found: 16
+834670	ID:1	Found    : 512
+834672	ID:1	Found    : 768
+834673	ID:1	In loop
+834700	ID:2	Found    : 256
+834701	ID:2	NOT Found: 16
+834703	ID:2	Found    : 768
+834704	ID:2	In loop
+835500	ID:3	Found    : 256
+835502	ID:3	Found    : 512
+835503	ID:3	NOT Found: 16
+835504	ID:3	In loop
+835668	ID:1	NOT Found: 16
+835670	ID:1	Found    : 512
+835672	ID:1	Found    : 768
+835673	ID:1	In loop
+835700	ID:2	Found    : 256
+835701	ID:2	NOT Found: 16
+835703	ID:2	Found    : 768
+835704	ID:2	In loop
+836500	ID:3	Found    : 256
+836502	ID:3	Found    : 512
+836503	ID:3	NOT Found: 16
+836504	ID:3	In loop
+836668	ID:1	NOT Found: 16
+836670	ID:1	Found    : 512
+836672	ID:1	Found    : 768
+836673	ID:1	In loop
+836700	ID:2	Found    : 256
+836701	ID:2	NOT Found: 16
+836703	ID:2	Found    : 768
+836704	ID:2	In loop
+837500	ID:3	Found    : 256
+837502	ID:3	Found    : 512
+837503	ID:3	NOT Found: 16
+837504	ID:3	In loop
+837668	ID:1	NOT Found: 16
+837670	ID:1	Found    : 512
+837672	ID:1	Found    : 768
+837673	ID:1	In loop
+837700	ID:2	Found    : 256
+837701	ID:2	NOT Found: 16
+837703	ID:2	Found    : 768
+837704	ID:2	In loop
+838500	ID:3	Found    : 256
+838502	ID:3	Found    : 512
+838503	ID:3	NOT Found: 16
+838504	ID:3	In loop
+838668	ID:1	NOT Found: 16
+838670	ID:1	Found    : 512
+838672	ID:1	Found    : 768
+838673	ID:1	In loop
+838700	ID:2	Found    : 256
+838701	ID:2	NOT Found: 16
+838703	ID:2	Found    : 768
+838704	ID:2	In loop
+839500	ID:3	Found    : 256
+839502	ID:3	Found    : 512
+839503	ID:3	NOT Found: 16
+839504	ID:3	In loop
+839668	ID:1	NOT Found: 16
+839670	ID:1	Found    : 512
+839672	ID:1	Found    : 768
+839673	ID:1	In loop
+
+
+
+
+
+==================================================================
+
+Looks Ok
+
+Now try starting them all together
+=======================================
+
+
+
+1084881	ID:1	Rime started with address 1.0
+1084890	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 1.
+1084906	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+1084908	ID:1	Starting 'Broadcast example'
+1085042	ID:1	broadcast message sent
+1085159	ID:2	Rime started with address 2.0
+1085168	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 2.
+1085184	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+1085186	ID:2	Starting 'Broadcast example'
+1085274	ID:1	broadcast message received from 2.0: 'Hello'
+1085275	ID:1	Inserted interface
+1085279	ID:1	1.0: sending runicast to address 2.0
+1085319	ID:2	broadcast message sent
+1085412	ID:3	Rime started with address 3.0
+1085422	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 3.
+1085437	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+1085439	ID:3	Starting 'Broadcast example'
+1085525	ID:1	broadcast message received from 3.0: 'Hello'
+1085526	ID:1	Inserted interface
+1085553	ID:2	broadcast message received from 3.0: 'Hello'
+1085555	ID:2	Inserted interface
+1085559	ID:2	2.0: sending runicast to address 3.0
+1085573	ID:3	broadcast message sent
+1085680	ID:2	runicast message received from 1.0, seqno 0
+1085682	ID:2	Inserted interface
+1085776	ID:1	runicast message sent to 2.0, retransmissions 1
+1085931	ID:3	runicast message received from 2.0, seqno 0
+1085932	ID:3	Inserted interface
+1086037	ID:1	NOT Found: 16
+1086039	ID:1	Found    : 512
+1086041	ID:1	Found    : 768
+1086041	ID:1	In loop
+1086053	ID:2	runicast message sent to 3.0, retransmissions 1
+1086315	ID:2	Found    : 256
+1086317	ID:2	NOT Found: 16
+1086319	ID:2	Found    : 768
+1086319	ID:2	In loop
+1086568	ID:3	NOT Found: 16
+1086570	ID:3	Found    : 512
+1086572	ID:3	NOT Found: 16
+1086572	ID:3	In loop
+1087037	ID:1	NOT Found: 16
+1087039	ID:1	Found    : 512
+1087041	ID:1	Found    : 768
+1087041	ID:1	In loop
+1087315	ID:2	Found    : 256
+1087317	ID:2	NOT Found: 16
+1087319	ID:2	Found    : 768
+1087319	ID:2	In loop
+1087568	ID:3	NOT Found: 16
+1087570	ID:3	Found    : 512
+1087572	ID:3	NOT Found: 16
+1087572	ID:3	In loop
+1088037	ID:1	NOT Found: 16
+1088039	ID:1	Found    : 512
+1088041	ID:1	Found    : 768
+1088041	ID:1	In loop
+1088315	ID:2	Found    : 256
+1088317	ID:2	NOT Found: 16
+1088319	ID:2	Found    : 768
+1088319	ID:2	In loop
+1088568	ID:3	NOT Found: 16
+1088570	ID:3	Found    : 512
+1088572	ID:3	NOT Found: 16
+1088572	ID:3	In loop
+1089037	ID:1	NOT Found: 16
+1089039	ID:1	Found    : 512
+1089041	ID:1	Found    : 768
+1089041	ID:1	In loop
+1089315	ID:2	Found    : 256
+1089317	ID:2	NOT Found: 16
+1089319	ID:2	Found    : 768
+1089319	ID:2	In loop
+1089568	ID:3	NOT Found: 16
+1089570	ID:3	Found    : 512
+1089572	ID:3	NOT Found: 16
+1089572	ID:3	In loop
+1090037	ID:1	NOT Found: 16
+1090039	ID:1	Found    : 512
+1090041	ID:1	Found    : 768
+1090041	ID:1	In loop
+1090315	ID:2	Found    : 256
+1090317	ID:2	NOT Found: 16
+1090319	ID:2	Found    : 768
+1090319	ID:2	In loop
+1090568	ID:3	NOT Found: 16
+1090570	ID:3	Found    : 512
+1090572	ID:3	NOT Found: 16
+1090572	ID:3	In loop
+1091037	ID:1	NOT Found: 16
+1091039	ID:1	Found    : 512
+1091041	ID:1	Found    : 768
+1091041	ID:1	In loop
+1091315	ID:2	Found    : 256
+1091317	ID:2	NOT Found: 16
+1091319	ID:2	Found    : 768
+1091319	ID:2	In loop
+1091568	ID:3	NOT Found: 16
+1091570	ID:3	Found    : 512
+1091572	ID:3	NOT Found: 16
+1091572	ID:3	In loop
+1092037	ID:1	NOT Found: 16
+1092039	ID:1	Found    : 512
+1092041	ID:1	Found    : 768
+1092041	ID:1	In loop
+1092315	ID:2	Found    : 256
+1092317	ID:2	NOT Found: 16
+1092319	ID:2	Found    : 768
+1092319	ID:2	In loop
+1092568	ID:3	NOT Found: 16
+1092570	ID:3	Found    : 512
+1092572	ID:3	NOT Found: 16
+1092572	ID:3	In loop
+1093037	ID:1	NOT Found: 16
+1093039	ID:1	Found    : 512
+1093041	ID:1	Found    : 768
+1093041	ID:1	In loop
+1093315	ID:2	Found    : 256
+1093317	ID:2	NOT Found: 16
+1093319	ID:2	Found    : 768
+1093319	ID:2	In loop
+1093568	ID:3	NOT Found: 16
+1093570	ID:3	Found    : 512
+1093572	ID:3	NOT Found: 16
+1093572	ID:3	In loop
+1094037	ID:1	NOT Found: 16
+1094039	ID:1	Found    : 512
+1094041	ID:1	Found    : 768
+1094041	ID:1	In loop
+1094315	ID:2	Found    : 256
+1094317	ID:2	NOT Found: 16
+1094319	ID:2	Found    : 768
+1094319	ID:2	In loop
+1094568	ID:3	NOT Found: 16
+1094570	ID:3	Found    : 512
+1094572	ID:3	NOT Found: 16
+1094572	ID:3	In loop
+1095037	ID:1	NOT Found: 16
+1095039	ID:1	Found    : 512
+1095041	ID:1	Found    : 768
+1095041	ID:1	In loop
+1095315	ID:2	Found    : 256
+1095317	ID:2	NOT Found: 16
+1095319	ID:2	Found    : 768
+1095319	ID:2	In loop
+1095568	ID:3	NOT Found: 16
+1095570	ID:3	Found    : 512
+1095572	ID:3	NOT Found: 16
+1095572	ID:3	In loop
+1096037	ID:1	NOT Found: 16
+1096039	ID:1	Found    : 512
+1096041	ID:1	Found    : 768
+1096041	ID:1	In loop
+1096315	ID:2	Found    : 256
+1096317	ID:2	NOT Found: 16
+1096319	ID:2	Found    : 768
+1096319	ID:2	In loop
+1096568	ID:3	NOT Found: 16
+1096570	ID:3	Found    : 512
+1096572	ID:3	NOT Found: 16
+1096572	ID:3	In loop
+1097037	ID:1	NOT Found: 16
+1097039	ID:1	Found    : 512
+1097041	ID:1	Found    : 768
+1097041	ID:1	In loop
+1097315	ID:2	Found    : 256
+1097317	ID:2	NOT Found: 16
+1097319	ID:2	Found    : 768
+1097319	ID:2	In loop
+1097568	ID:3	NOT Found: 16
+1097570	ID:3	Found    : 512
+1097572	ID:3	NOT Found: 16
+1097572	ID:3	In loop
+1098037	ID:1	NOT Found: 16
+1098039	ID:1	Found    : 512
+1098041	ID:1	Found    : 768
+1098041	ID:1	In loop
+1098315	ID:2	Found    : 256
+1098317	ID:2	NOT Found: 16
+1098319	ID:2	Found    : 768
+1098319	ID:2	In loop
+1098568	ID:3	NOT Found: 16
+1098570	ID:3	Found    : 512
+1098572	ID:3	NOT Found: 16
+1098572	ID:3	In loop
+1099037	ID:1	NOT Found: 16
+1099039	ID:1	Found    : 512
+1099041	ID:1	Found    : 768
+1099041	ID:1	In loop
+1099315	ID:2	Found    : 256
+1099317	ID:2	NOT Found: 16
+1099319	ID:2	Found    : 768
+1099319	ID:2	In loop
+1099568	ID:3	NOT Found: 16
+1099570	ID:3	Found    : 512
+1099572	ID:3	NOT Found: 16
+1099572	ID:3	In loop
+1100037	ID:1	NOT Found: 16
+1100039	ID:1	Found    : 512
+1100041	ID:1	Found    : 768
+1100041	ID:1	In loop
+1100315	ID:2	Found    : 256
+1100317	ID:2	NOT Found: 16
+1100319	ID:2	Found    : 768
+1100319	ID:2	In loop
+1100568	ID:3	NOT Found: 16
+1100570	ID:3	Found    : 512
+1100572	ID:3	NOT Found: 16
+1100572	ID:3	In loop
+1101037	ID:1	NOT Found: 16
+1101039	ID:1	Found    : 512
+1101041	ID:1	Found    : 768
+1101041	ID:1	In loop
+
+
+
+all Ok, except 3 does not know about 1
+3 COULD NOT hear 1's broadcast because he was not up in time
+
+So, did 1 hear 3's broadcast?
+
+
+
+==========================================================================================
+
+No with the additional process and the linked list
+
+FIRST RUN
+
+485	ID:2	Rime started with address 2.0
+494	ID:2	MAC 02:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 2.
+509	ID:2	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+513	ID:2	Starting 'Broadcast example' 'Runicast Process'
+631	ID:1	Rime started with address 1.0
+640	ID:1	MAC 01:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 1.
+646	ID:2	broadcast message sent
+655	ID:1	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+659	ID:1	Starting 'Broadcast example' 'Runicast Process'
+792	ID:1	broadcast message sent
+1148	ID:3	Rime started with address 3.0
+1157	ID:3	MAC 03:00:00:00:00:00:00:00 Contiki 2.5 started. Node id is set to 3.
+1173	ID:3	CSMA ContikiMAC, channel check rate 8 Hz, radio channel 26
+1176	ID:3	Starting 'Broadcast example' 'Runicast Process'
+1254	ID:2	broadcast message received from 3.0: 'Hello'
+1255	ID:2	Inserted interface
+1274	ID:1	broadcast message received from 3.0: 'Hello'
+1275	ID:1	Inserted interface
+1309	ID:3	broadcast message sent
+1640	ID:2	NOT Found: 16
+1642	ID:2	NOT Found: 16
+1644	ID:2	Found    : 768
+1644	ID:2	In loop
+1786	ID:1	NOT Found: 16
+1788	ID:1	NOT Found: 16
+1790	ID:1	Found    : 768
+1790	ID:1	In loop
+2304	ID:3	NOT Found: 16
+2305	ID:3	NOT Found: 16
+2307	ID:3	NOT Found: 16
+2307	ID:3	In loop
+2640	ID:2	NOT Found: 16
+2642	ID:2	NOT Found: 16
+2644	ID:2	Found    : 768
+2644	ID:2	In loop
+2786	ID:1	NOT Found: 16
+2788	ID:1	NOT Found: 16
+2790	ID:1	Found    : 768
+2790	ID:1	In loop
+3304	ID:3	NOT Found: 16
+3305	ID:3	NOT Found: 16
+3307	ID:3	NOT Found: 16
+3307	ID:3	In loop
+3640	ID:2	NOT Found: 16
+3642	ID:2	NOT Found: 16
+3644	ID:2	Found    : 768
+3644	ID:2	In loop
+3786	ID:1	NOT Found: 16
+3788	ID:1	NOT Found: 16
+3790	ID:1	Found    : 768
+3790	ID:1	In loop
+4304	ID:3	NOT Found: 16
+4305	ID:3	NOT Found: 16
+4307	ID:3	NOT Found: 16
+4307	ID:3	In loop
+4640	ID:2	NOT Found: 16
+4642	ID:2	NOT Found: 16
+4644	ID:2	Found    : 768
+4644	ID:2	In loop
+4786	ID:1	NOT Found: 16
+4788	ID:1	NOT Found: 16
+4790	ID:1	Found    : 768
+4790	ID:1	In loop
+5304	ID:3	NOT Found: 16
+5305	ID:3	NOT Found: 16
+5307	ID:3	NOT Found: 16
+5307	ID:3	In loop
+5640	ID:2	NOT Found: 16
+5642	ID:2	NOT Found: 16
+5644	ID:2	Found    : 768
+5644	ID:2	In loop
+5786	ID:1	NOT Found: 16
+5788	ID:1	NOT Found: 16
+5790	ID:1	Found    : 768
+5790	ID:1	In loop
+6304	ID:3	NOT Found: 16
+6305	ID:3	NOT Found: 16
+6307	ID:3	NOT Found: 16
+6307	ID:3	In loop
+6640	ID:2	NOT Found: 16
+6642	ID:2	NOT Found: 16
+6644	ID:2	Found    : 768
+6644	ID:2	In loop
+6786	ID:1	NOT Found: 16
+6788	ID:1	NOT Found: 16
+6790	ID:1	Found    : 768
+6790	ID:1	In loop
+7304	ID:3	NOT Found: 16
+7305	ID:3	NOT Found: 16
+7307	ID:3	NOT Found: 16
+7307	ID:3	In loop
+7640	ID:2	NOT Found: 16
+7642	ID:2	NOT Found: 16
+7644	ID:2	Found    : 768
+7644	ID:2	In loop
+7786	ID:1	NOT Found: 16
+7788	ID:1	NOT Found: 16
+7790	ID:1	Found    : 768
+7790	ID:1	In loop
+8304	ID:3	NOT Found: 16
+8305	ID:3	NOT Found: 16
+8307	ID:3	NOT Found: 16
+8307	ID:3	In loop
+8640	ID:2	NOT Found: 16
+8642	ID:2	NOT Found: 16
+8644	ID:2	Found    : 768
+8644	ID:2	In loop
+8786	ID:1	NOT Found: 16
+8788	ID:1	NOT Found: 16
+8790	ID:1	Found    : 768
+8790	ID:1	In loop
+9304	ID:3	NOT Found: 16
+9305	ID:3	NOT Found: 16
+9307	ID:3	NOT Found: 16
+9307	ID:3	In loop
+9640	ID:2	NOT Found: 16
+9642	ID:2	NOT Found: 16
+9644	ID:2	Found    : 768
+9644	ID:2	In loop
+9786	ID:1	NOT Found: 16
+9788	ID:1	NOT Found: 16
+9790	ID:1	Found    : 768
+9790	ID:1	In loop
+10304	ID:3	NOT Found: 16
+10305	ID:3	NOT Found: 16
+10307	ID:3	NOT Found: 16
+10307	ID:3	In loop
+10640	ID:2	NOT Found: 16
+10642	ID:2	NOT Found: 16
+10644	ID:2	Found    : 768
+10644	ID:2	In loop
+10786	ID:1	NOT Found: 16
+10788	ID:1	NOT Found: 16
+10790	ID:1	Found    : 768
+10790	ID:1	In loop
+11304	ID:3	NOT Found: 16
+11305	ID:3	NOT Found: 16
+11307	ID:3	NOT Found: 16
+11307	ID:3	In loop
+11640	ID:2	NOT Found: 16
+11642	ID:2	NOT Found: 16
+11644	ID:2	Found    : 768
+11644	ID:2	In loop
+11786	ID:1	NOT Found: 16
+11788	ID:1	NOT Found: 16
+11790	ID:1	Found    : 768
+11790	ID:1	In loop
+12304	ID:3	NOT Found: 16
+12305	ID:3	NOT Found: 16
+12307	ID:3	NOT Found: 16
+12307	ID:3	In loop
+12640	ID:2	NOT Found: 16
+12642	ID:2	NOT Found: 16
+12644	ID:2	Found    : 768
+12644	ID:2	In loop
+12786	ID:1	NOT Found: 16
+12788	ID:1	NOT Found: 16
+12790	ID:1	Found    : 768
+12790	ID:1	In loop
+13304	ID:3	NOT Found: 16
+13305	ID:3	NOT Found: 16
+13307	ID:3	NOT Found: 16
+13307	ID:3	In loop
+13640	ID:2	NOT Found: 16
+13642	ID:2	NOT Found: 16
+13644	ID:2	Found    : 768
+13644	ID:2	In loop
+13786	ID:1	NOT Found: 16
+13788	ID:1	NOT Found: 16
+13790	ID:1	Found    : 768
+13790	ID:1	In loop
+14304	ID:3	NOT Found: 16
+14305	ID:3	NOT Found: 16
+14307	ID:3	NOT Found: 16
+14307	ID:3	In loop
+14640	ID:2	NOT Found: 16
+14642	ID:2	NOT Found: 16
+14644	ID:2	Found    : 768
+14644	ID:2	In loop
+14786	ID:1	NOT Found: 16
+14788	ID:1	NOT Found: 16
+14790	ID:1	Found    : 768
+14790	ID:1	In loop
+15304	ID:3	NOT Found: 16
+15305	ID:3	NOT Found: 16
+15307	ID:3	NOT Found: 16
+15307	ID:3	In loop
+15640	ID:2	NOT Found: 16
+15642	ID:2	NOT Found: 16
+15644	ID:2	Found    : 768
+15644	ID:2	In loop
+15786	ID:1	NOT Found: 16
+15788	ID:1	NOT Found: 16
+15790	ID:1	Found    : 768
+15790	ID:1	In loop
+16304	ID:3	NOT Found: 16
+16305	ID:3	NOT Found: 16
+16307	ID:3	NOT Found: 16
+16307	ID:3	In loop
+16640	ID:2	NOT Found: 16
+16642	ID:2	NOT Found: 16
+16644	ID:2	Found    : 768
+16644	ID:2	In loop
+16786	ID:1	NOT Found: 16
+16788	ID:1	NOT Found: 16
+16790	ID:1	Found    : 768
+16790	ID:1	In loop
+17304	ID:3	NOT Found: 16
+17305	ID:3	NOT Found: 16
+17307	ID:3	NOT Found: 16
+17307	ID:3	In loop
+17640	ID:2	NOT Found: 16
+17642	ID:2	NOT Found: 16
+17644	ID:2	Found    : 768
+17644	ID:2	In loop
+17786	ID:1	NOT Found: 16
+17788	ID:1	NOT Found: 16
+17790	ID:1	Found    : 768
+17790	ID:1	In loop
+18304	ID:3	NOT Found: 16
+18305	ID:3	NOT Found: 16
+18307	ID:3	NOT Found: 16
+18307	ID:3	In loop
+18640	ID:2	NOT Found: 16
+18642	ID:2	NOT Found: 16
+18644	ID:2	Found    : 768
+18644	ID:2	In loop
+18786	ID:1	NOT Found: 16
+18788	ID:1	NOT Found: 16
+18790	ID:1	Found    : 768
+18790	ID:1	In loop
+19304	ID:3	NOT Found: 16
+19305	ID:3	NOT Found: 16
+19307	ID:3	NOT Found: 16
+19307	ID:3	In loop
+
+
+
+
+
+
+
+
+
+
+
+
+
